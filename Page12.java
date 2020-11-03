@@ -5,7 +5,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 
 public class Page12 extends Sint101P2 {
-  public void phase12 (HttpServletRequest request, HttpServletResponse response, String pdegree) {
+  public void phase12 (HttpServletRequest request, HttpServletResponse response, String pdegree) throws IOException, ServletException {
     response.setContentType("text/html");
     PrintWriter out = response.getWriter();
 
