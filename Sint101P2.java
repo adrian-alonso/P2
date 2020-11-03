@@ -17,7 +17,7 @@ public class Sint101P2 extends HttpServlet {
   public void doGet (HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
     String pphase = request.getParameter("pphase");
     String passwd = request.getParameter("p");
-    String pdregree = request.getParameter("pdegree");
+    String pdegree = request.getParameter("pdegree");
     String psubject = request.getParameter("psubject");
     Page01 page01 = new Page01();
     Page02 page02 = new Page02();
