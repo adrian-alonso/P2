@@ -27,7 +27,7 @@ public class Page01 extends Sint101P2 {
     out.println("<input type=\"hidden\" id=\"pphase\" name=\"pphase\" value=\"02\">Ver los ficheros err&oacuteneos<br>");
     out.println("<div id=\"openModal\" class=\"modalDialog\">");
     out.println("<div><input type=\"password\" id=\"passwd\" name=\"passwd\" value=\"" + passwd + "\">");
-    out.println("<a href=\"#send\" title=\"Send\" class=\"send\">Enviar</a></div>");
+    out.println("<a href=\"&pphase=02\" title=\"Send\" class=\"send\">Enviar</a></div>");
     out.println("</div>");
     out.println("</form>");
     out.println("</section>");

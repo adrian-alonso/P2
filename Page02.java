@@ -6,6 +6,8 @@ import javax.servlet.http.*;
 
 public class Page02 extends Sint101P2 {
   public void phase02 (HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    String passwd = request.getParameter("p");
+
     response.setContentType("text/html");
     PrintWriter out = response.getWriter();
 
@@ -19,7 +21,7 @@ public class Page02 extends Sint101P2 {
     out.println("<h1>Servicio de consulta de expedientes acad&eacutemicos</h1>");
     out.println("</header>");
     out.println("<section>");
-    out.println("<h2>warnings:</h2>");
+    out.println("<h2>warnings:" + passwd +"</h2>");
     out.println("<p>errores</p>");
     out.println("</section>");
     out.println("<footer>");
