@@ -9,6 +9,7 @@ public class Page11 extends Sint101P2 {
     response.setContentType("text/html");
     PrintWriter out = response.getWriter();
 
+    out.println("<!DOCTYPE html>");
     out.println("<html>");
     out.println("<head>");
     out.println("<title>P2EA</title>");

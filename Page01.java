@@ -6,9 +6,12 @@ import javax.servlet.http.*;
 
 public class Page01 extends Sint101P2 {
   public void phase01 (HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    String passwd = request.getParameter("p");
+
     response.setContentType("text/html");
     PrintWriter out = response.getWriter();
 
+    out.println("<!DOCTYPE html>");
     out.println("<html>");
     out.println("<head>");
     out.println("<title>P2EA</title>");
@@ -19,7 +22,14 @@ public class Page01 extends Sint101P2 {
     out.println("</header>");
     out.println("<section>");
     out.println("<h2>Bienvenido a este servicio</h2>");
-    out.println("<p>Ver los ficheros err&oacuteneos</p>");
+    out.println("<form method=\"get\" >");
+    out.println("<a href=\"#passwd\">Ver los ficheros err&oacuteneos</a>");
+    out.println("<input type=\"hidden\" id=\"pphase\" name=\"pphase\" value=\"02\">Ver los ficheros err&oacuteneos<br>");
+    out.println("<div id=\"openModal\" class=\"modalDialog\">");
+    out.println("<div><input type=\"password\" id=\"passwd\" name=\"passwd\" value=\"" + passwd + "\">");
+    out.println("<a href=\"#send\" title=\"Send\" class=\"send\">Enviar</a></div>");
+    out.println("</div>");
+    out.println("</form>");
     out.println("</section>");
     out.println("<section>");
     out.println("<h3>Selecciona una consulta:</h3>");
