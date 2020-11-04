@@ -36,7 +36,7 @@ public class Page01 extends Sint101P2 {
     out.println("</section>");
     out.println("<section>");
     out.println("<h3>Selecciona una consulta:</h3>");
-    out.println("<p>Consulta 1: Ver los alumnos de una asignatura de una titulaci&oacuten</p>");
+    out.println("<a href=\"?pphase=11\">Consulta 1: Ver los alumnos de una asignatura de una titulaci&oacuten</a>");
     out.println("</section>");
     out.println("<footer>");
     out.println("<p>&copy Adri&aacuten Alonso Vilar (2020-2021)</p>");

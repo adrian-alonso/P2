@@ -28,10 +28,10 @@ public class Page02 extends Sint101P2 {
     out.println("<p>errores</p>");
     out.println("</section>");
     out.println("<section>");
-    out.println("<form name=\"form\" method=\"get\">");
-    out.println("<input type=\"submit\" class=\"backButton\" value=\"Atrás\" onclick=\"back()\">");
-    out.println("<a href=\"?pphase=02\"></a>");
-    out.println("</form>");
+    // out.println("<form name=\"form\" method=\"get\">");
+    // out.println("<input type=\"submit\" class=\"backButton\" name=\"back\" value=\"Atrás\" onclick=\"?pphase=01\">");
+    // out.println("</form>");
+    out.println("<a href=\"?pphase=01\">Atr&aacutes</a>");
     out.println("</section>");
     out.println("<footer>");
     out.println("<p>&copy Adri&aacuten Alonso Vilar (2020-2021)</p>");

@@ -25,10 +25,12 @@ public class Page13 extends Sint101P2 {
     out.println("<p>Este es el resultado:</p>");
     out.println("</section>");
     out.println("<section>");
-    out.println("<form name=\"form\" method=\"get\">");
-    out.println("<input type=\"submit\" class=\"homeButton\" value=\"Inicio\" onclick=\"form.pphase.value=\"01\"\">");
-    out.println("<input type=\"submit\" class=\"backButton\" value=\"Atrás\" onclick=\"pphase.value=\"12\"\">");
-    out.println("</form>");
+    // out.println("<form name=\"form\" method=\"get\">");
+    // out.println("<input type=\"submit\" class=\"homeButton\" value=\"Inicio\" onclick=\"form.pphase.value=\"01\"\">");
+    // out.println("<input type=\"submit\" class=\"backButton\" value=\"Atrás\" onclick=\"pphase.value=\"12\"\">");
+    // out.println("</form>");
+    out.println("<a href=\"?pphase=01\">Inicio</a>");
+    out.println("<a href=\"?pphase=12\">Atr&aacutes</a>");
     out.println("</section>");
     out.println("<footer>");
     out.println("<p>&copy Adri&aacuten Alonso Vilar (2020-2021)</p>");
