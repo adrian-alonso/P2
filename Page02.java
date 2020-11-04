@@ -6,7 +6,7 @@ import javax.servlet.http.*;
 
 public class Page02 extends Sint101P2 {
   public void phase02 (HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-    String passwd = request.getParameter("p");
+    String passwd = (String)request.getAttribute("password");
 
     response.setContentType("text/html");
     PrintWriter out = response.getWriter();
@@ -23,6 +23,9 @@ public class Page02 extends Sint101P2 {
     out.println("<section>");
     out.println("<h2>warnings:" + passwd +"</h2>");
     out.println("<p>errores</p>");
+    out.println("<form method=\"get\">");
+    out.println("<input type=\"submit\" class=\"backButton\" value=\"Atrás\" onclick=\"form.pphase.value=01\">");
+    out.println("</form>");
     out.println("</section>");
     out.println("<footer>");
     out.println("<p>&copy Adri&aacuten Alonso Vilar (2020-2021)</p>");
