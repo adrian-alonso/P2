@@ -26,31 +26,31 @@ public class Sint101P2 extends HttpServlet {
     Page13 page13 = new Page13();
 
     if (pphase == null) {
-      page01.phase01(request, response);
+      page01.phase01(request, response, pphase);
     } else {
       switch (pphase.trim()) {
         case "01":
-          page01.phase01(request, response);
+          page01.phase01(request, response, pphase);
           break;
 
        case "02":
-         page02.phase02(request, response);
+         page02.phase02(request, response, pphase);
          break;
 
        case "11":
-         page11.phase11(request, response);
+         page11.phase11(request, response, pphase);
          break;
 
        case "12":
-         page12.phase12(request, response, pdegree);
+         page12.phase12(request, response, pphase, pdegree);
          break;
 
        case "13":
-         page13.phase13(request, response, pdegree, psubject);
+         page13.phase13(request, response, pphase, pdegree, psubject);
          break;
 
        default:
-         page01.phase01(request, response);
+         page01.phase01(request, response, pphase);
          break;
 
       }

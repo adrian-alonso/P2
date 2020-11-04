@@ -5,9 +5,12 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 
 public class Page02 extends Sint101P2 {
-  public void phase02 (HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+  public void phase02 (HttpServletRequest request, HttpServletResponse response, String pphase) throws IOException, ServletException {
     String passwd = (String)request.getAttribute("password");
 
+
+    //HTML DE LA PAGINA phase 02
+    //
     response.setContentType("text/html");
     PrintWriter out = response.getWriter();
 
@@ -23,8 +26,11 @@ public class Page02 extends Sint101P2 {
     out.println("<section>");
     out.println("<h2>warnings:" + passwd +"</h2>");
     out.println("<p>errores</p>");
-    out.println("<form method=\"get\">");
-    out.println("<input type=\"submit\" class=\"backButton\" value=\"Atrás\" onclick=\"form.pphase.value=01\">");
+    out.println("</section>");
+    out.println("<section>");
+    out.println("<form name=\"form\" method=\"get\">");
+    out.println("<input type=\"submit\" class=\"backButton\" value=\"Atrás\" onclick=\"back()\">");
+    out.println("<a href=\"?pphase=02\"></a>");
     out.println("</form>");
     out.println("</section>");
     out.println("<footer>");

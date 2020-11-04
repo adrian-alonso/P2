@@ -5,12 +5,14 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 
 public class Page01 extends Sint101P2 {
-  public void phase01 (HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+  public void phase01 (HttpServletRequest request, HttpServletResponse response, String pphase) throws IOException, ServletException {
     String passwd = request.getParameter("p");
 
     response.setContentType("text/html");
     PrintWriter out = response.getWriter();
 
+    //HTML DE LA PAGINA phase 01
+    //
     out.println("<!DOCTYPE html>");
     out.println("<html>");
     out.println("<head>");
@@ -22,7 +24,7 @@ public class Page01 extends Sint101P2 {
     out.println("</header>");
     out.println("<section>");
     out.println("<h2>Bienvenido a este servicio</h2>");
-    out.println("<form method=\"get\" >");
+    out.println("<form name=\"form\" method=\"get\" >");
     out.println("<a href=\"?pphase=02\">Ver los ficheros err&oacuteneos</a>");
     out.println("<input type=\"hidden\" id=\"pphase\" name=\"pphase\" value=\"02\">");
     // out.println("<div id=\"openModal\" class=\"modalDialog\">");
