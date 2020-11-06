@@ -66,4 +66,41 @@
     </xs:complexType>
   </xs:element>
 
+  <xs:element name="Student">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element ref="Name" minOccurs="1" maxOccurs="1"/>
+        <xs:choice>
+          <xs:element ref="Dni" minOccurs="1" maxOccurs="1"/>
+          <xs:element ref="Resident" minOccurs="1" maxOccurs="1"/>
+        </xs:choice>
+        <xs:element ref="Grade" minOccurs="1" maxOccurs="1"/>
+        <xs:element ref="EAML" minOccurs="1" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Dni">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:pattern value="[0-9]{8}[A-Z]"/>
+      </xs:restriction>
+  </xs:element>
+
+  <xs:element name="Resident">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:pattern value="[A-Z][0-9]{7}"/>
+      </xs:restriction>
+  </xs:element>
+
+  <xs:element name="Grade">
+    <xs:simpleType>
+      <xs:restriction base="xs:integer">
+        <xs:pattern value="[0-9]{2}"/>
+      </xs:restriction>
+  </xs:element>
+
+  <xs:element name="EAML" type="xs:anyURI"/>
+
 </xs:schema>
