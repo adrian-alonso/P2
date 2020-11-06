@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://wwww.w3.org/2001/XMLSchema">
+
+  <xs:element name="Degree">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Name" minOccurs="1" maxOccurs="1"/>
+        <xs:element ref="Scope" minOccurs="1" maxOccurs="1"/>
+        <xs:element ref="Course" minOccurs="1" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute name="location" use="optional">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Vigo"/>
+            <xs:enumeration value="Ourense"/>
+            <xs:enumeration value="Pontevedra"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Name" type="xs:string"/>
+
+  <xs:element name="Scope">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:enumeration value="hummanities"/>
+        <xs:enumeration value="science"/>
+        <xs:enumeration value="technology"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+
+  <xs:element name="Course">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Subject" minOccurs="1" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute name="number" use="required">
+        <xs:simpleType>
+          <xs:restriction base="xs:integer">
+            <xs:pattern value="[1-4]"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Subject">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Name" minOccurs="1" maxOccurs="1"/>
+        <xs:element ref="Student" minOccurs="1" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute name="idSub" type="xs:string" use="required"/>
+      <xs:attribute name="type" use="required">
+        <xs:simpleType>
+          <xs:restriction base="xs:string" default="core">
+            <xs:enumeration value="core"/>
+            <xs:enumeration value="specialty"/>
+            <xs:enumeration value="optional"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>

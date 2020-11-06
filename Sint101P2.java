@@ -14,7 +14,7 @@ public class Sint101P2 extends HttpServlet {
     }
   }
 
-  public void doGet (HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+  public void doGet (HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
     String pphase = request.getParameter("pphase");
     String passwd = request.getParameter("p");
     String pdegree = request.getParameter("pdegree");
@@ -25,32 +25,33 @@ public class Sint101P2 extends HttpServlet {
     Page12 page12 = new Page12();
     Page13 page13 = new Page13();
 
+    //Seleccionamos la fase a la que se quiera acceder
     if (pphase == null) {
-      page01.phase01(request, response, pphase);
+      page01.phase01(req, res, pphase);
     } else {
       switch (pphase.trim()) {
         case "01":
-          page01.phase01(request, response, pphase);
+          page01.phase01(req, res, pphase);
           break;
 
        case "02":
-         page02.phase02(request, response, pphase);
+         page02.phase02(req, res, pphase);
          break;
 
        case "11":
-         page11.phase11(request, response, pphase);
+         page11.phase11(req, res, pphase);
          break;
 
        case "12":
-         page12.phase12(request, response, pphase, pdegree);
+         page12.phase12(req, res, pphase, pdegree);
          break;
 
        case "13":
-         page13.phase13(request, response, pphase, pdegree, psubject);
+         page13.phase13(req, res, pphase, pdegree, psubject);
          break;
 
        default:
-         page01.phase01(request, response, pphase);
+         page01.phase01(req, res, pphase);
          break;
 
       }
