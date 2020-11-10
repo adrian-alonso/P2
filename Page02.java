@@ -5,7 +5,17 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 
 public class Page02 extends Sint101P2 {
-  public void phase02 (HttpServletRequest request, HttpServletResponse response, String pphase) throws IOException, ServletException {
+  public void phase02 (HttpServletRequest request, HttpServletResponse response, String auto, String pphase) throws IOException, ServletException {
+    if(auto==null){
+      this.page02HTML(request, response, pphase);
+    } else if (!auto.equals("si")) {
+      this.page02HTML(request, response, pphase);
+    } else {
+      this.page02XML(request, response, pphase);
+    }
+  }
+
+  public void page02HTML(HttpServletRequest request, HttpServletResponse response, String pphase) throws IOException, ServletException {
     String passwd = (String)request.getAttribute("password");
 
 
@@ -39,4 +49,8 @@ public class Page02 extends Sint101P2 {
     out.println("</body>");
     out.println("</html>");
   }
+
+  public void page02XML(HttpServletRequest request, HttpServletResponse response, String pphase) throws IOException, ServletException {
+  }
+
 }

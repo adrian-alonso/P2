@@ -75,7 +75,7 @@
           <xs:element ref="Resident" minOccurs="1" maxOccurs="1"/>
         </xs:choice>
         <xs:element ref="Grade" minOccurs="1" maxOccurs="1"/>
-        <xs:element ref="EAML" minOccurs="1" maxOccurs="unbounded"/>
+        <xs:element ref="EAML" minOccurs="0" maxOccurs="unbounded"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>

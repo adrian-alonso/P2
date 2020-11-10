@@ -5,7 +5,17 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 
 public class Page11 extends Sint101P2 {
-  public void phase11 (HttpServletRequest request, HttpServletResponse response, String pphase) throws IOException, ServletException {
+  public void phase11 (HttpServletRequest request, HttpServletResponse response, String auto, String pphase) throws IOException, ServletException {
+    if(auto==null){
+      this.page11HTML(request, response, pphase);
+    } else if (!auto.equals("si")) {
+      this.page11HTML(request, response, pphase);
+    } else {
+      this.page11XML(request, response, pphase);
+    }
+  }
+
+  public void page11HTML(HttpServletRequest request, HttpServletResponse response, String pphase) throws IOException, ServletException {
     response.setContentType("text/html");
     PrintWriter out = response.getWriter();
 
@@ -36,4 +46,8 @@ public class Page11 extends Sint101P2 {
     out.println("</body>");
     out.println("</html>");
   }
+
+  public void page11XML(HttpServletRequest request, HttpServletResponse response, String pphase) throws IOException, ServletException {
+  }
+
 }
