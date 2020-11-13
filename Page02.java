@@ -8,19 +8,16 @@ public class Page02 extends Sint101P2 {
   public void phase02 (HttpServletRequest request, HttpServletResponse response, String auto, String pphase) throws IOException, ServletException {
     if(auto==null){
       this.page02HTML(request, response, pphase);
-    } else if (!auto.equals("si")) {
+    } else if (!auto.equals("true")) {
       this.page02HTML(request, response, pphase);
     } else {
       this.page02XML(request, response, pphase);
     }
   }
 
+  //HTML DE LA PAGINA
   public void page02HTML(HttpServletRequest request, HttpServletResponse response, String pphase) throws IOException, ServletException {
     String passwd = (String)request.getAttribute("password");
-
-
-    //HTML DE LA PAGINA phase 02
-    //
     response.setContentType("text/html");
     PrintWriter out = response.getWriter();
 
@@ -50,7 +47,13 @@ public class Page02 extends Sint101P2 {
     out.println("</html>");
   }
 
+  //MODO AUTO: PRESENTACION EN XML
   public void page02XML(HttpServletRequest request, HttpServletResponse response, String pphase) throws IOException, ServletException {
+    response.setContentType("text/xml");
+    PrintWriter out = response.getWriter();
+
+    out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+    out.println("");
   }
 
 }

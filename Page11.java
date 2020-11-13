@@ -8,19 +8,17 @@ public class Page11 extends Sint101P2 {
   public void phase11 (HttpServletRequest request, HttpServletResponse response, String auto, String pphase) throws IOException, ServletException {
     if(auto==null){
       this.page11HTML(request, response, pphase);
-    } else if (!auto.equals("si")) {
+    } else if (!auto.equals("true")) {
       this.page11HTML(request, response, pphase);
     } else {
       this.page11XML(request, response, pphase);
     }
   }
 
+  //HTML DE LA PAGINA
   public void page11HTML(HttpServletRequest request, HttpServletResponse response, String pphase) throws IOException, ServletException {
     response.setContentType("text/html");
     PrintWriter out = response.getWriter();
-
-    //HTML DE LA PAGINA phase 11
-    //
     out.println("<!DOCTYPE html>");
     out.println("<html>");
     out.println("<head>");
@@ -47,7 +45,17 @@ public class Page11 extends Sint101P2 {
     out.println("</html>");
   }
 
-  public void page11XML(HttpServletRequest request, HttpServletResponse response, String pphase) throws IOException, ServletException {
+  //MODO AUTO: PRESENTACION EN XML
+  public void page11XML(HttpServletRequest request, HttpServletResponse response, String pphase, ArrayList<String> degrees) throws IOException, ServletException {
+    response.setContentType("text/xml");
+    PrintWriter out = response.getWriter();
+
+    out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+    out.println("<degrees>");
+    for (int i=0; i<degrees.size(); i++){
+      out.println("<degree>" + degrees.get(i) + "</degree>");
+    }
+    out.println("</degrees>");
   }
 
 }

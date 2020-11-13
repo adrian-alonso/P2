@@ -8,19 +8,17 @@ public class Page12 extends Sint101P2 {
   public void phase12 (HttpServletRequest request, HttpServletResponse response, String auto, String pphase, String pdegree) throws IOException, ServletException {
     if(auto==null){
       this.page12HTML(request, response, pphase, pdegree);
-    } else if (!auto.equals("si")) {
+    } else if (!auto.equals("true")) {
       this.page12HTML(request, response, pphase, pdegree);
     } else {
       this.page12XML(request, response, pphase, pdegree);
     }
   }
 
+  //HTML DE LA PAGINA
   public void page12HTML(HttpServletRequest request, HttpServletResponse response, String pphase, String pdegree) throws IOException, ServletException {
     response.setContentType("text/html");
     PrintWriter out = response.getWriter();
-
-    //HTML DE LA PAGINA phase 12
-    //
     out.println("<!DOCTYPE html>");
     out.println("<html>");
     out.println("<head>");
@@ -49,7 +47,17 @@ public class Page12 extends Sint101P2 {
     out.println("</html>");
   }
 
-  public void page12XML(HttpServletRequest request, HttpServletResponse response, String pphase, String pdegree) throws IOException, ServletException {
+  //MODO AUTO: PRESENTACION EN XML
+  public void page12XML(HttpServletRequest request, HttpServletResponse response, String pphase, String pdegree, ArrayList<Subject> subjects) throws IOException, ServletException {
+    response.setContentType("text/xml");
+    PrintWriter out = response.getWriter();
+
+    out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+    out.println("<subjects>");
+    for (int i=0; i<subjects.size(); i++){
+      out.println("<subject course=\"" + subjects.get(i).getCourse + "\" type=\"" + subjects.get(i).getType + "\">" + subjects.get(i).getSubjectName + "</subject>");
+    }
+    out.println("</subjects>");
   }
 
 }
