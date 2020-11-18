@@ -196,12 +196,22 @@ public class FrontEnd {
   public void phase12 (HttpServletRequest request, HttpServletResponse response, String pphase, String pdegree) throws IOException, ServletException {
     String auto = request.getParameter("auto");
 
-    if(auto==null){
-      this.page12HTML(request, response, pphase, pdegree);
-    } else if (!auto.equals("true")) {
-      this.page12HTML(request, response, pphase, pdegree);
+    if (pdegree == null) {
+      if(auto==null){
+        this.noParamHTML(request, response, "pdegree");
+      } else if (!auto.equals("true")) {
+        this.noParamHTML(request, response, "pdegree");
+      } else {
+        this.noParamXML(request, response, "pdegree");
+      }
     } else {
-      this.page12XML(request, response, pphase, pdegree);
+      if(auto==null){
+        this.page12HTML(request, response, pphase, pdegree);
+      } else if (!auto.equals("true")) {
+        this.page12HTML(request, response, pphase, pdegree);
+      } else {
+        this.page12XML(request, response, pphase, pdegree);
+      }
     }
   }
 
@@ -257,13 +267,32 @@ public class FrontEnd {
   //Seleccion modo pantalla (auto/browser)
   public void phase13 (HttpServletRequest request, HttpServletResponse response, String pphase, String pdegree, String psubject) throws IOException, ServletException {
     String auto = request.getParameter("auto");
-
-    if(auto==null){
-      this.page13HTML(request, response, pphase, pdegree, psubject);
-    } else if (!auto.equals("true")) {
-      this.page13HTML(request, response, pphase, pdegree, psubject);
+    if (pdegree == null) {
+      if(auto==null){
+        this.noParamHTML(request, response, "pdegree");
+      } else if (!auto.equals("true")) {
+        this.noParamHTML(request, response, "pdegree");
+      } else {
+        this.noParamXML(request, response, "pdegree");
+      }
     } else {
-      this.page13XML(request, response, pphase, pdegree, psubject);
+      if (psubject == null){
+        if(auto==null){
+          this.noParamHTML(request, response, "psubject");
+        } else if (!auto.equals("true")) {
+          this.noParamHTML(request, response, "psubject");
+        } else {
+          this.noParamXML(request, response, "psubject");
+        }
+      } else {
+        if(auto==null){
+          this.page13HTML(request, response, pphase, pdegree, psubject);
+        } else if (!auto.equals("true")) {
+          this.page13HTML(request, response, pphase, pdegree, psubject);
+        } else {
+          this.page13XML(request, response, pphase, pdegree, psubject);
+        }
+      }
     }
   }
 

@@ -32,7 +32,7 @@ public class ErrorHandler extends DefaulHandler {
       fatalError = 1;
     }
 
-    //Funciones para detectar que ha ocurrido una excepciones
+    //Funciones para detectar que ha ocurrido una excepcion
     public int getWarning() {
       return warning;
     }
