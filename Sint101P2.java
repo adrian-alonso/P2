@@ -45,45 +45,102 @@ public class Sint101P2 extends HttpServlet {
 
   public void doGet (HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
     String pphase = req.getParameter("pphase");
-    String passwd = req.getParameter("p");
     String pdegree = req.getParameter("pdegree");
     String psubject = req.getParameter("psubject");
+    String password = req.getParameter("p");
     String auto = req.getParameter("auto");
-    Page01 page01 = new Page01();
-    Page02 page02 = new Page02();
-    Page11 page11 = new Page11();
-    Page12 page12 = new Page12();
-    Page13 page13 = new Page13();
+    FrontEnd checkParameters = new FrontEnd();
+    // Page01 page01 = new Page01();
+    // Page02 page02 = new Page02();
+    // Page11 page11 = new Page11();
+    // Page12 page12 = new Page12();
+    // Page13 page13 = new Page13();
 
-    //Seleccionamos la fase a la que se quiera acceder
-    if (pphase == null) {
-      page01.phase01(req, res, auto, pphase);
+    //Comprobamos si hay contraseña y si es correcta
+    //En caso afirmativo sleccionamos la fase a la que se quiera acceder
+    if (password == null) {
+      if(auto==null){
+        checkParameters.noPasswordHTML(req, res);
+      } else if (!auto.equals("true")) {
+        checkParameters.noPasswordHTML(req, res);
+      } else {
+        checkParameters.noPasswordXML(req, res);
+      }
+    } else if (!password.equals("Aadri4n999")) {
+      if(auto==null){
+        checkParameters.badPasswordHTML(req, res);
+      } else if (!auto.equals("true")) {
+        checkParameters.badPasswordHTML(req, res);
+      } else {
+        checkParameters.badPasswordXML(req, res);
+      }
     } else {
-      switch (pphase.trim()) {
-        case "01":
-          page01.phase01(req, res, auto, pphase);
-          break;
 
-       case "02":
-         page02.phase02(req, res, auto, pphase);
-         break;
+      if (pphase == null) {
+        checkParameters.phase01(req, res, pphase);
+        // page01.phase01(req, res, pphase);
+      } else {
+        switch (pphase.trim()) {
+          case "01":
+            checkParameters.phase01(req, res, pphase);
+            // page01.phase01(req, res, pphase);
+            break;
 
-       case "11":
-         page11.phase11(req, res, auto, pphase);
-         break;
+         case "02":
+           // page02.phase02(req, res, pphase);
+           checkParameters.phase02(req, res, pphase);
+           break;
 
-       case "12":
-         page12.phase12(req, res, auto, pphase, pdegree);
-         break;
+         case "11":
+           // page11.phase11(req, res, pphase);
+           checkParameters.phase11(req, res, pphase);
+           break;
 
-       case "13":
-         page13.phase13(req, res, auto, pphase, pdegree, psubject);
-         break;
+         case "12":
+           if (pdegree == null) {
+             if(auto==null){
+               checkParameters.noParamHTML(req, res, "pdegree");
+             } else if (!auto.equals("true")) {
+               checkParameters.noParamHTML(req, res, "pdegree");
+             } else {
+               checkParameters.noParamXML(req, res, "pdegree");
+             }
+           } else {
+             // page12.phase12(req, res, pphase, pdegree);
+             checkParameters.phase12(req, res, pphase, pdegree);
+           }
+           break;
 
-       default:
-         page01.phase01(req, res, auto, pphase);
-         break;
+         case "13":
+           if (pdegree == null) {
+             if(auto==null){
+               checkParameters.noParamHTML(req, res, "pdegree");
+             } else if (!auto.equals("true")) {
+               checkParameters.noParamHTML(req, res, "pdegree");
+             } else {
+               checkParameters.noParamXML(req, res, "pdegree");
+             }
+           } else {
+             if (psubject == null){
+               if(auto==null){
+                 checkParameters.noParamHTML(req, res, "psubject");
+               } else if (!auto.equals("true")) {
+                 checkParameters.noParamHTML(req, res, "psubject");
+               } else {
+                 checkParameters.noParamXML(req, res, "psubject");
+               }
+             } else {
+               // page13.phase13(req, res, pphase, pdegree, psubject);
+               checkParameters.phase13(req, res, pphase, pdegree, psubject);
+             }
+           }
+           break;
 
+         default:
+           // page01.phase01(req, res, pphase);
+           checkParameters.phase01(req, res, pphase);
+           break;
+        }
       }
     }
   }

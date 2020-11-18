@@ -12,7 +12,7 @@
         <xs:simpleType>
           <xs:restriction base="xs:string">
             <xs:enumeration value="Vigo"/>
-            <xs:enumeration value="Ourense"/>
+            <xs:enumeration value="Orense"/>
             <xs:enumeration value="Pontevedra"/>
           </xs:restriction>
         </xs:simpleType>
@@ -54,9 +54,9 @@
         <xs:element ref="Student" minOccurs="1" maxOccurs="unbounded"/>
       </xs:sequence>
       <xs:attribute name="idSub" type="xs:string" use="required"/>
-      <xs:attribute name="type" use="required">
+      <xs:attribute name="type" use="optional">
         <xs:simpleType>
-          <xs:restriction base="xs:string" default="core">
+          <xs:restriction base="xs:string">
             <xs:enumeration value="core"/>
             <xs:enumeration value="specialty"/>
             <xs:enumeration value="optional"/>
@@ -93,7 +93,7 @@
         <xs:pattern value="[A-Z][0-9]{7}"/>
       </xs:restriction>
   </xs:element>
-
+  <!-- AÑADIR DIRECCION ALUMNO -->
   <xs:element name="Grade">
     <xs:simpleType>
       <xs:restriction base="xs:integer">
