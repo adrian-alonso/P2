@@ -13,7 +13,6 @@ import org.w3c.dom.NodeList;
 import java.io.IOException;
 
 public class Sint101P2 extends HttpServlet {
-  //private final static String PASS = "";
   final static String JAXP_SCHEMA_LANGUAGE = "http://java.sun.com/xml/jaxp/properties/schemaLanguage";
   final static String W3C_XML_SCHEMA = "http://www.w3.org/2001/XMLSchema";
   final static String JAXP_SCHEMA_SOURCE = "http://java.sun.com/xml/jaxp/properties/schemaSource";
