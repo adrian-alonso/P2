@@ -1,3 +1,5 @@
+package p2;
+
 import java.util.*;
 import javax.xml.parsers;
 import org.w3c.dom;
@@ -22,6 +24,6 @@ public class EAMLlists {
   }
 
   public ArrayList<Student> getC1Students(String degree, String subject) {
-    
+
   }
 }
