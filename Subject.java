@@ -42,4 +42,8 @@ public class Subject {
     return  " --- Curso = '" + course + "' --- Tipo = '" + type + "'";
   }
 
+  public int compareTo(Subject s) {
+    return this.subjectName.compareTo(s.getSubjectName());
+  }
+
 }

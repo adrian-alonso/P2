@@ -51,4 +51,8 @@ public class Student {
     }
   }
 
+  public int compareTo(Student st) {
+    return this.id.compareTo(st.getId());
+  }
+
 }

@@ -35,7 +35,7 @@ public class Parser {
     dbf.setAttribute(JAXP_SCHEMA_LANGUAGE,W3C_XML_SCHEMA);
     dbf.setAttribute(JAXP_SCHEMA_SOURCE,file);
 
-    DocumentBuilder db;
+    DocumentBuilder db = null;
     try {
       db  = dbf.newDocumentBuilder();
     } catch(ParserConfigurationException pce) {
@@ -56,7 +56,7 @@ public class Parser {
     ErrorHandler eamlErrorHandler = new ErrorHandler();
     db.setErrorHandler(eamlErrorHandler);
 
-    Document doc;
+    Document doc = null;
     try {
       doc = db.parse(eamlFile);
     } catch(SAXException saxe) {
@@ -92,6 +92,22 @@ public class Parser {
     } catch (XPathExpressionException xpe_e) {
 
     }
+
+    //En caso de warnings
+
+    //En caso de errores
+    if (eamlErrorHandler.getError() == 1) {
+      ErrorFile error = new ErrorFile(file, eamlErrorHandler.getErrorList());
+      boolean anyerror = false;
+      //for
+      if (!anyerror) {
+        errorsFiles.add(error);
+      }
+    }
+
+
+    //En caso de errores fatales
+
 
     return false;
   }

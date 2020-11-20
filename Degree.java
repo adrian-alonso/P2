@@ -51,4 +51,8 @@ public class Degree {
     }
   }
 
+  public int compareTo(Degree d) {
+    return this.degreeName.compareTo(d.getDegreeName());
+  }
+
 }
