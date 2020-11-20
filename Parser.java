@@ -94,20 +94,46 @@ public class Parser {
     }
 
     //En caso de warnings
+    if (eamlErrorHandler.getWarning() == 1) {
+      WarningFile warning = new WarningFile(file, eamlErrorHandler.getWarningList());
+      boolean anywarning = false;
+      for (int i = 0; i < warningsFiles.size(); i++) {
+        if (warningsFiles.get(i).getWarningID().equals(warning.getWarningID())) {
+          anywarning = true;
+        }
+      }
+      if (!anywarning) {
+        warningsFiles.add(warning);
+      }
+    }
 
     //En caso de errores
     if (eamlErrorHandler.getError() == 1) {
       ErrorFile error = new ErrorFile(file, eamlErrorHandler.getErrorList());
       boolean anyerror = false;
-      //for
+      for (int i = 0; i < errorsFiles.size(); i++) {
+        if (errorsFiles.get(i).getErrorID().equals(error.getErrorID())) {
+          anyerror = true;
+        }
+      }
       if (!anyerror) {
         errorsFiles.add(error);
       }
     }
 
-
     //En caso de errores fatales
-
+    if (eamlErrorHandler.getFatalError() == 1) {
+      FatalErrorFile fatalerror = new FatalErrorFile(file, eamlErrorHandler.getFatalErrorList());
+      boolean anyfatalerror = false;
+      for (int i = 0; i < fatalErrorsFiles.size(); i++) {
+        if (fatalErrorsFiles.get(i).getFatalErrorID().equals(fatalerror.getFatalErrorID())) {
+          anyfatalerror = true;
+        }
+      }
+      if (!anyfatalerror) {
+        fatalErrorsFiles.add(fatalerror);
+      }
+    }
 
     return false;
   }
