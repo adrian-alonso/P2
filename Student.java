@@ -43,7 +43,7 @@ public class Student {
   }
 
   //METODO TOSTRING
-  public void toString() {
+  public String toString() {
     if (address == null) {
       return "Nombre = '" + studentName + "' --- ID = '" + id + "' --- Dirección = ''";
     } else {

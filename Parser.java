@@ -2,7 +2,7 @@ package p2;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.io.IOException;
+import java.io.*;
 import javax.xml.parsers.*;
 import javax.xml.xpath.*;
 import org.w3c.dom.*;
