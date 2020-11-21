@@ -17,26 +17,33 @@ public class Sint101P2 extends HttpServlet {
   final static String W3C_XML_SCHEMA = "http://www.w3.org/2001/XMLSchema";
   final static String JAXP_SCHEMA_SOURCE = "http://java.sun.com/xml/jaxp/properties/schemaSource";
 
-  // Document BuilderFactorydbf= DocumentBuilderFactory.newInstance();
-  // dbf.setValidating(true);     /* factoríade parsers validadores*/
-  // dbf.setNamespaceAware(true);
-  // dbf.setAttribute(JAXP_SCHEMA_LANGUAGE, W3C_XML_SCHEMA);
-  // File fileSchema= new File(“eaml.xsd”);   // ¿cuál es la ruta completa?
-  // dbf.setAttribute(JAXP_SCHEMA_SOURCE, fileSchema);
-  // DocumentBuilderdb= dbf.newDocumentBuilder();
-  // EAML_ErrorHandlererrorHandler= new EAML_ErrorHandler();
-  // db.setErrorHandler(errorHandler);
-  // Document doc = db.parse(URL o fichero);
-
-  //WARNINGS Y ERRORES
-  // static ArrayList<ErrorFile> FileWithErrors = new ArrayList<ErrorFile>();
-  // static ArrayList<WarningFile> FileWithErrors = new ArrayList<WarningFile>();
-  // static ArrayList<FatalErrorFile> FileWithErrors = new ArrayList<FatalErrorFile>();
+  final static String url = "";
+  static File EAML;
+  //Lista de documentos validos
+  static HashMap<String,Document> mapDocs = new HashMap<String, Document>();
+  //Listas de warnings, errores y errores fatales
+  static ArrayList<WarningFile> warningsFiles = new ArrayList<WarningFile>();
+  static ArrayList<ErrorFile> errorsFiles = new ArrayList<ErrorFile>();
+  static ArrayList<FatalErrorFile> fatalErrorsFiles = new ArrayList<FatalErrorFile>();
 
 
   public void init (ServletConfig config) throws ServletException {
     try {
-
+      ServletContext srvCtx= config.getServletContext();
+      TVMLXSD = new File(srvCtx.getRealPath("/p2/tvml.xsd"));
+      //Llamo al parser
+      Parser eamlParser = new Parser();
+      docsMap =tvmlParser.parsear(inicio);Archivo: /home/adrian/Documentos/sintL...a/public_html/p2/Sint27P2.java
+      Página 2 de 21
+      //Obtengo errores
+      FicherosConErrores = tvmlParser.getFicheros_erroneos();
+      Collections.sort(FicherosConErrores);
+      //Obtengo avisos
+      FicherosConAvisos = tvmlParser.getFicheros_avisados();
+      Collections.sort(FicherosConAvisos);
+      //Obtengo errores fatales
+      FicherosConFatales = tvmlParser.getFicheros_fatales();
+      Collections.sort(FicherosConFatales);
     } catch(Exception e) {
 
     }

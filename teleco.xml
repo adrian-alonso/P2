@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Degree location='Vigo'>
+  <Name>Teleco</Name>
+  <Scope>technology</Scope>
+  <Course number='1'>
+    <Subject idSub='AO' type='core'>
+      <Name>AO</Name>
+      <Student>
+        <Name>Adrián Alonso</Name>
+        <Dni>35488995H</Dni>
+        <Grade>6</Grade>
+      </Student>
+    </Subject>
+  </Course>
