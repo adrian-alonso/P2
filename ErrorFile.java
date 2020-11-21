@@ -2,7 +2,7 @@ package p2;
 
 import java.util.ArrayList;
 
-public class ErrorFile {
+public class ErrorFile implements Comparable<ErrorFile> {
   String errorID;
   ArrayList<String> errors = new ArrayList<String>();
 

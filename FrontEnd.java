@@ -7,6 +7,10 @@ import java.util.ArrayList;
 
 public class FrontEnd {
 
+  //CONSTRUCTOR
+  public FrontEnd() {
+  }
+
   //FASE 01
   //Seleccion modo pantalla (auto/browser)
   public void phase01 (HttpServletRequest request, HttpServletResponse response, String pphase) throws IOException, ServletException {
@@ -131,23 +135,23 @@ public class FrontEnd {
 
   //FASE 11
   //Seleccion modo pantalla (auto/browser)
-  public void phase11 (HttpServletRequest request, HttpServletResponse response, String pphase) throws IOException, ServletException {
+  public void phase11 (HttpServletRequest request, HttpServletResponse response, String pphase, ArrayList<String> degrees) throws IOException, ServletException {
     String auto = request.getParameter("auto");
 
-    ArrayList<String> degrees = new ArrayList<String>();
-    degrees.add("Teleco");
-    degrees.add("Industriales");
+    //ArrayList<String> degrees = new ArrayList<String>();
+    //degrees.add("Teleco");
+    //degrees.add("Industriales");
     if(auto==null){
-      this.page11HTML(request, response, pphase);
+      this.page11HTML(request, response, pphase, degrees);
     } else if (!auto.equals("true")) {
-      this.page11HTML(request, response, pphase);
+      this.page11HTML(request, response, pphase, degrees);
     } else {
       this.page11XML(request, response, pphase, degrees);
     }
   }
 
   //HTML DE LA PAGINA
-  public void page11HTML(HttpServletRequest request, HttpServletResponse response, String pphase) throws IOException, ServletException {
+  public void page11HTML(HttpServletRequest request, HttpServletResponse response, String pphase, ArrayList<String> degrees) throws IOException, ServletException {
     String password = request.getParameter("p");
 
     response.setContentType("text/html");
@@ -164,6 +168,12 @@ public class FrontEnd {
     out.println("<section>");
     out.println("<h2>Consulta 1: Fase 1</h2>");
     out.println("<p>Selecciona :</p>");
+    out.println("<ol>");
+    out.println("<li>" + degrees.size() + "</li>");
+    for (int i = 0; i < degrees.size(); i++) {
+      out.println("<li><a href=\"?pphase=12&p=" + password + "&pdegree=" + degrees.get(i) + "\">" + degrees.get(i) + "</a></li>");
+    }
+    out.println("</ol>");
     out.println("</section>");
     out.println("<section>");
     // out.println("<form name=\"form\" method=\"get\">");

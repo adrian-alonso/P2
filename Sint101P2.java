@@ -1,6 +1,7 @@
 package p2;
 
 import java.io.*;
+import java.util.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -17,10 +18,10 @@ public class Sint101P2 extends HttpServlet {
   final static String W3C_XML_SCHEMA = "http://www.w3.org/2001/XMLSchema";
   final static String JAXP_SCHEMA_SOURCE = "http://java.sun.com/xml/jaxp/properties/schemaSource";
 
-  final static String url = "";
-  static File EAML;
+  final static String url = "http://localhost:7101/sint101/p2/teleco.xml";
+  static File eaml = new File("http://localhost:7101/sint101/p2/eaml.xsd");
   //Lista de documentos validos
-  static HashMap<String,Document> mapDocs = new HashMap<String, Document>();
+  static HashMap<String,Document> docsMap = new HashMap<String, Document>();
   //Listas de warnings, errores y errores fatales
   static ArrayList<WarningFile> warningsFiles = new ArrayList<WarningFile>();
   static ArrayList<ErrorFile> errorsFiles = new ArrayList<ErrorFile>();
@@ -29,23 +30,25 @@ public class Sint101P2 extends HttpServlet {
 
   public void init (ServletConfig config) throws ServletException {
     try {
-      ServletContext srvCtx= config.getServletContext();
-      TVMLXSD = new File(srvCtx.getRealPath("/p2/tvml.xsd"));
+      ServletContext servletcontext= config.getServletContext();
+      eaml = new File(servletcontext.getRealPath("/p2/eaml.xsd"));
+
       //Llamo al parser
       Parser eamlParser = new Parser();
-      docsMap =tvmlParser.parsear(inicio);Archivo: /home/adrian/Documentos/sintL...a/public_html/p2/Sint27P2.java
-      Página 2 de 21
-      //Obtengo errores
-      FicherosConErrores = tvmlParser.getFicheros_erroneos();
-      Collections.sort(FicherosConErrores);
-      //Obtengo avisos
-      FicherosConAvisos = tvmlParser.getFicheros_avisados();
-      Collections.sort(FicherosConAvisos);
-      //Obtengo errores fatales
-      FicherosConFatales = tvmlParser.getFicheros_fatales();
-      Collections.sort(FicherosConFatales);
-    } catch(Exception e) {
+      docsMap = eamlParser.parser(url);
 
+      //Obtengo avisos
+      warningsFiles = eamlParser.getWarningsFiles();
+      Collections.sort(warningsFiles);
+      //Obtengo errores
+      errorsFiles = eamlParser.getErrorsFiles();
+      Collections.sort(errorsFiles);
+      //Obtengo errores fatales
+      fatalErrorsFiles = eamlParser.getFatalErrorsFiles();
+      Collections.sort(fatalErrorsFiles);
+
+    } catch(Exception e) {
+      
     }
   }
 
@@ -57,6 +60,7 @@ public class Sint101P2 extends HttpServlet {
     String password = req.getParameter("p");
     String auto = req.getParameter("auto");
 
+    EAMLlists eamlLists = new EAMLlists(eaml, docsMap);
     FrontEnd screen = new FrontEnd();
 
     //Comprobamos si hay contraseña y si es correcta
@@ -92,7 +96,8 @@ public class Sint101P2 extends HttpServlet {
            break;
 
          case "11":
-           screen.phase11(req, res, pphase);
+           ArrayList<String> degrees = eamlLists.getC1Degrees();
+           screen.phase11(req, res, pphase, degrees);
            break;
 
          case "12":
