@@ -68,7 +68,7 @@ public class Parser {
     XPath xpath = xpathfactory.newXPath();
     String exp = "//EAML";
 
-    String degree;
+    String degree = null;
     try {
 
       //Obtenemos el grado
@@ -135,6 +135,26 @@ public class Parser {
       }
     }
 
+    //En caso de que el fichero este correcto
+    if ((eamlErrorHandler.getWarning() == 0) && (eamlErrorHandler.getError() == 0) && (eamlErrorHandler.getFatalError() == 0)) {
+     if ((degree != null) && (!(docsMap.containsKey(degree)))) {
+       docsMap.put(degree,doc);
+     }
+    }
+
     return false;
+  }
+
+  //METODOS PARA OBTENER LAS LISTAS
+  public ArrayList<WarningFile> getWarningsFiles() {
+    return warningsFiles;
+  }
+
+  public ArrayList<ErrorFile> getErrorsFiles() {
+    return errorsFiles;
+  }
+
+  public ArrayList<FatalErrorFile> getFatalErrorsFiles() {
+    return fatalErrorsFiles;
   }
 }
