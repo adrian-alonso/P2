@@ -5,6 +5,10 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import java.util.ArrayList;
 
+import java.util.HashMap;
+import org.w3c.dom.Document;
+
+
 public class FrontEnd {
 
   //CONSTRUCTOR
@@ -13,20 +17,20 @@ public class FrontEnd {
 
   //FASE 01
   //Seleccion modo pantalla (auto/browser)
-  public void phase01 (HttpServletRequest request, HttpServletResponse response, String pphase) throws IOException, ServletException {
+  public void phase01 (HttpServletRequest request, HttpServletResponse response, String pphase, int number, HashMap<String,Document> docsMap) throws IOException, ServletException {
     String auto = request.getParameter("auto");
 
     if(auto==null){
-      this.page01HTML(request, response, pphase);
+      this.page01HTML(request, response, pphase, number, docsMap);
     } else if (!auto.equals("true")) {
-      this.page01HTML(request, response, pphase);
+      this.page01HTML(request, response, pphase, number, docsMap);
     } else {
       this.page01XML(request, response, pphase);
     }
   }
 
   //HTML DE LA PAGINA
-  public void page01HTML(HttpServletRequest request, HttpServletResponse response, String pphase) throws IOException, ServletException {
+  public void page01HTML(HttpServletRequest request, HttpServletResponse response, String pphase, int number, HashMap<String,Document> docsMap) throws IOException, ServletException {
     String password = request.getParameter("p");
 
     response.setContentType("text/html");
@@ -56,6 +60,8 @@ public class FrontEnd {
     out.println("<section>");
     out.println("<h3>Selecciona una consulta:</h3>");
     out.println("<a href=\"?pphase=11&p=" + password + "\">Consulta 1: Ver los alumnos de una asignatura de una titulaci&oacuten</a>");
+    out.println("<p>Number: " + number + "</p>");
+    out.println("<p>docsMap: " + docsMap + "</p>");
     out.println("</section>");
     out.println("<footer>");
     out.println("<hr>");
@@ -78,20 +84,20 @@ public class FrontEnd {
 
   //FASE 02
   //Seleccion modo pantalla (auto/browser)
-  public void phase02 (HttpServletRequest request, HttpServletResponse response, String pphase) throws IOException, ServletException {
+  public void phase02 (HttpServletRequest request, HttpServletResponse response, String pphase, ArrayList<WarningFile> warningsFiles, ArrayList<ErrorFile> errorsFiles, ArrayList<FatalErrorFile> fatalErrorsFiles) throws IOException, ServletException {
     String auto = request.getParameter("auto");
 
     if(auto==null){
-      this.page02HTML(request, response, pphase);
+      this.page02HTML(request, response, pphase, warningsFiles, errorsFiles, fatalErrorsFiles);
     } else if (!auto.equals("true")) {
-      this.page02HTML(request, response, pphase);
+      this.page02HTML(request, response, pphase, warningsFiles, errorsFiles, fatalErrorsFiles);
     } else {
       this.page02XML(request, response, pphase);
     }
   }
 
   //HTML DE LA PAGINA
-  public void page02HTML(HttpServletRequest request, HttpServletResponse response, String pphase) throws IOException, ServletException {
+  public void page02HTML(HttpServletRequest request, HttpServletResponse response, String pphase, ArrayList<WarningFile> warningsFiles, ArrayList<ErrorFile> errorsFiles, ArrayList<FatalErrorFile> fatalErrorsFiles) throws IOException, ServletException {
     String password = request.getParameter("p");
 
     response.setContentType("text/html");
@@ -107,8 +113,33 @@ public class FrontEnd {
     out.println("<h1>Servicio de consulta de expedientes acad&eacutemicos</h1>");
     out.println("</header>");
     out.println("<section>");
-    out.println("<h2>warnings:" + password +"</h2>");
-    out.println("<p>errores</p>");
+    out.println("<h2>Se han encontrado " + warningsFiles.size() + " ficheros con warnings:</h2>");
+    out.println("<ul>");
+    for (int i = 0; i < warningsFiles.size(); i++){
+      out.println("<li type=\"disc\">" + warningsFiles.get(i).getWarningID() + "</li>");
+      for (int j = 0; j < warningsFiles.get(i).getWarnings().size(); j++){
+        out.println("<ol><li type=\"circle\">" + warningsFiles.get(i).getWarnings().get(j) + "</li></ol>");
+      }
+    }
+    out.println("</ul>");
+    out.println("<h2>Se han encontrado " + errorsFiles.size() + " ficheros con errores:</h2>");
+    out.println("<ul>");
+    for (int i = 0; i < errorsFiles.size(); i++){
+      out.println("<li type=\"disc\">" + errorsFiles.get(i).getErrorID() + "</li>");
+      for (int j = 0; j < errorsFiles.get(i).getErrors().size(); j++){
+        out.println("<ol><li type=\"circle\">" + errorsFiles.get(i).getErrors().get(j) + "</li></ol>");
+      }
+    }
+    out.println("</ul>");
+    out.println("<h2>Se han encontrado " + fatalErrorsFiles.size() + " ficheros con errores fatales:</h2>");
+    out.println("<ul>");
+    for (int i = 0; i < fatalErrorsFiles.size(); i++){
+      out.println("<li type=\"disc\">" + fatalErrorsFiles.get(i).getFatalErrorID() + "</li>");
+      for (int j = 0; j < fatalErrorsFiles.get(i).getFatalErrors().size(); j++){
+        out.println("<ol><li type=\"circle\">" + fatalErrorsFiles.get(i).getFatalErrors().get(j) + "</li></ol>");
+      }
+    }
+    out.println("</ul>");
     out.println("</section>");
     out.println("<section>");
     // out.println("<form name=\"form\" method=\"get\">");

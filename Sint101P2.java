@@ -18,8 +18,8 @@ public class Sint101P2 extends HttpServlet {
   final static String W3C_XML_SCHEMA = "http://www.w3.org/2001/XMLSchema";
   final static String JAXP_SCHEMA_SOURCE = "http://java.sun.com/xml/jaxp/properties/schemaSource";
 
-  final static String url = "http://localhost:7101/sint101/p2/teleco.xml";
-  static File eaml = new File("http://localhost:7101/sint101/p2/eaml.xsd");
+  final static String url = "/p2/teleco.xml";
+  static File eaml = new File("/p2/eaml.xsd");
   //Lista de documentos validos
   static HashMap<String,Document> docsMap = new HashMap<String, Document>();
   //Listas de warnings, errores y errores fatales
@@ -27,15 +27,19 @@ public class Sint101P2 extends HttpServlet {
   static ArrayList<ErrorFile> errorsFiles = new ArrayList<ErrorFile>();
   static ArrayList<FatalErrorFile> fatalErrorsFiles = new ArrayList<FatalErrorFile>();
 
+  public int number;
+
 
   public void init (ServletConfig config) throws ServletException {
     try {
+      number = 0;
       ServletContext servletcontext= config.getServletContext();
       eaml = new File(servletcontext.getRealPath("/p2/eaml.xsd"));
 
       //Llamo al parser
       Parser eamlParser = new Parser();
-      docsMap = eamlParser.parser(url);
+      docsMap = eamlParser.parser(servletcontext.getRealPath(url));
+      number = eamlParser.number;
 
       //Obtengo avisos
       warningsFiles = eamlParser.getWarningsFiles();
@@ -48,7 +52,7 @@ public class Sint101P2 extends HttpServlet {
       Collections.sort(fatalErrorsFiles);
 
     } catch(Exception e) {
-      
+
     }
   }
 
@@ -84,15 +88,15 @@ public class Sint101P2 extends HttpServlet {
     } else {
 
       if (pphase == null) {
-        screen.phase01(req, res, pphase);
+        screen.phase01(req, res, pphase, number, docsMap);
       } else {
         switch (pphase.trim()) {
           case "01":
-            screen.phase01(req, res, pphase);
+            screen.phase01(req, res, pphase, number, docsMap);
             break;
 
          case "02":
-           screen.phase02(req, res, pphase);
+           screen.phase02(req, res, pphase, warningsFiles, errorsFiles, fatalErrorsFiles);
            break;
 
          case "11":
@@ -109,7 +113,7 @@ public class Sint101P2 extends HttpServlet {
            break;
 
          default:
-           screen.phase01(req, res, pphase);
+           screen.phase01(req, res, pphase, number, docsMap);
            break;
         }
       }
