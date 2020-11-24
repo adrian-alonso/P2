@@ -37,11 +37,9 @@ public class Parser {
     dbf.setAttribute(JAXP_SCHEMA_LANGUAGE,W3C_XML_SCHEMA);
     dbf.setAttribute(JAXP_SCHEMA_SOURCE,file);
 
-    number = 1;
     DocumentBuilder db = null;
     try {
       db  = dbf.newDocumentBuilder();
-      number = 2;
     } catch(ParserConfigurationException pce) {
     }
 
@@ -60,12 +58,12 @@ public class Parser {
     ErrorHandler eamlErrorHandler = new ErrorHandler();
     db.setErrorHandler(eamlErrorHandler);
 
-    number = 3;
+    number = 1;
     Document doc = null;
     docsMap.put(Integer.toString(number),doc);
     try {
       doc = db.parse(eamlFile);
-      number = 4;
+      number = 2;
       docsMap.put(Integer.toString(number),doc);
     } catch(SAXException saxe) {
     } catch (IOException ioe) {
@@ -78,32 +76,33 @@ public class Parser {
 
     String degree = null;
     try {
-      number = 5;
+      number = 3;
 
       docsMap.put(Integer.toString(number),doc);
       //Obtenemos el grado
       NodeList degreenode = doc.getElementsByTagName("Name");
+      docsMap.put(((Element)degreenode.item(0)).getTextContent(),doc);
       //NodeList degreenode = (NodeList)xpath.evaluate("//Degree",doc,XPathConstants.NODESET);
       degree = ((Element)degreenode.item(0)).getTextContent();
+      docsMap.put(degree,doc);
       //degree = ((Element)degreenode.item(0)).getElementsByTagName("Name");
 
-      number = 6;
+      number = 4;
       docsMap.put(Integer.toString(number),doc);
       //Obtenemos los nodos eaml
       NodeList eamlnodes = (NodeList)xpath.evaluate(exp, doc, XPathConstants.NODESET);
       filesList.add(file);
 
-      number = 7;
+      number = 5;
+      docsMap.put(Integer.toString(number),doc);
       //Buscamos mas ficheros EAML
       for (int i = 0; i < eamlnodes.getLength(); i++) {
         nextFile = eamlnodes.item(i).getTextContent();
-        number = number + 1;
         if (!filesList.contains(nextFile)) {
             return true;
         }
       }
 
-      docsMap.put(Integer.toString(number),doc);
     } catch(NullPointerException npe) {
     } catch (XPathExpressionException xpe_e) {
     }
@@ -112,7 +111,6 @@ public class Parser {
     if (eamlErrorHandler.getWarning() == 1) {
       WarningFile warning = new WarningFile(file, eamlErrorHandler.getWarningList());
       boolean anywarning = false;
-      number = 100;
       for (int i = 0; i < warningsFiles.size(); i++) {
         if (warningsFiles.get(i).getWarningID().equals(warning.getWarningID())) {
           anywarning = true;
@@ -127,7 +125,6 @@ public class Parser {
     if (eamlErrorHandler.getError() == 1) {
       ErrorFile error = new ErrorFile(file, eamlErrorHandler.getErrorList());
       boolean anyerror = false;
-      number = 200;
       System.out.println("ID: " + error.toString() + " Error: " + eamlErrorHandler.getErrorList());
       for (int i = 0; i < errorsFiles.size(); i++) {
         if (errorsFiles.get(i).getErrorID().equals(error.getErrorID())) {
@@ -143,7 +140,6 @@ public class Parser {
     if (eamlErrorHandler.getFatalError() == 1) {
       FatalErrorFile fatalerror = new FatalErrorFile(file, eamlErrorHandler.getFatalErrorList());
       boolean anyfatalerror = false;
-      number = 300;
       for (int i = 0; i < fatalErrorsFiles.size(); i++) {
         if (fatalErrorsFiles.get(i).getFatalErrorID().equals(fatalerror.getFatalErrorID())) {
           anyfatalerror = true;
