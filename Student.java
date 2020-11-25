@@ -1,6 +1,6 @@
 package p2;
 
-public class Student {
+public class Student implements Comparable<Student> {
   String studentName;
   String id;
   int grade;

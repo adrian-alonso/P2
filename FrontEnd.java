@@ -234,7 +234,7 @@ public class FrontEnd {
 
   //FASE 12
   //Seleccion modo pantalla (auto/browser)
-  public void phase12 (HttpServletRequest request, HttpServletResponse response, String pphase, String pdegree) throws IOException, ServletException {
+  public void phase12 (HttpServletRequest request, HttpServletResponse response, String pphase, String pdegree, ArrayList<Subject> subjects) throws IOException, ServletException {
     String auto = request.getParameter("auto");
 
     if (pdegree == null) {
@@ -247,9 +247,9 @@ public class FrontEnd {
       }
     } else {
       if(auto==null){
-        this.page12HTML(request, response, pphase, pdegree);
+        this.page12HTML(request, response, pphase, pdegree, subjects);
       } else if (!auto.equals("true")) {
-        this.page12HTML(request, response, pphase, pdegree);
+        this.page12HTML(request, response, pphase, pdegree, subjects);
       } else {
         this.page12XML(request, response, pphase, pdegree);
       }
@@ -257,7 +257,7 @@ public class FrontEnd {
   }
 
   //HTML DE LA PAGINA
-  public void page12HTML(HttpServletRequest request, HttpServletResponse response, String pphase, String pdegree) throws IOException, ServletException {
+  public void page12HTML(HttpServletRequest request, HttpServletResponse response, String pphase, String pdegree, ArrayList<Subject> subjects) throws IOException, ServletException {
     String password = request.getParameter("p");
 
     response.setContentType("text/html");
@@ -274,6 +274,12 @@ public class FrontEnd {
     out.println("<section>");
     out.println("<h2>Consulta 1: Fase 2 (Titulaci&oacuten=" + pdegree + ")</h2>");
     out.println("<p>Selecciona una asignatura:</p>");
+    out.println("<ol>");
+    out.println("<li>" + subjects.size() + "</li>");
+    for (int i = 0; i < subjects.size(); i++) {
+      out.println("<li><a href=\"?pphase=13&p=" + password + "&pdegree=" + pdegree + "\"&psubject=\"" + subjects.get(i) + "\">" + subjects.get(i) + "</a></li>");
+    }
+    out.println("</ol>");
     out.println("</section>");
     out.println("<section>");
     // out.println("<form name=\"form\" method=\"get\">");
@@ -306,7 +312,7 @@ public class FrontEnd {
 
   //FASE 13
   //Seleccion modo pantalla (auto/browser)
-  public void phase13 (HttpServletRequest request, HttpServletResponse response, String pphase, String pdegree, String psubject) throws IOException, ServletException {
+  public void phase13 (HttpServletRequest request, HttpServletResponse response, String pphase, String pdegree, String psubject, ArrayList<Student> students) throws IOException, ServletException {
     String auto = request.getParameter("auto");
     if (pdegree == null) {
       if(auto==null){
@@ -327,9 +333,9 @@ public class FrontEnd {
         }
       } else {
         if(auto==null){
-          this.page13HTML(request, response, pphase, pdegree, psubject);
+          this.page13HTML(request, response, pphase, pdegree, psubject, students);
         } else if (!auto.equals("true")) {
-          this.page13HTML(request, response, pphase, pdegree, psubject);
+          this.page13HTML(request, response, pphase, pdegree, psubject, students);
         } else {
           this.page13XML(request, response, pphase, pdegree, psubject);
         }
@@ -338,7 +344,7 @@ public class FrontEnd {
   }
 
   //HTML DE LA PAGINA
-  public void page13HTML(HttpServletRequest request, HttpServletResponse response, String pphase, String pdegree, String psubject) throws IOException, ServletException {
+  public void page13HTML(HttpServletRequest request, HttpServletResponse response, String pphase, String pdegree, String psubject, ArrayList<Student> students) throws IOException, ServletException {
     String password = request.getParameter("p");
 
     response.setContentType("text/html");

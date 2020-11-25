@@ -1,6 +1,6 @@
 package p2;
 
-public class Subject {
+public class Subject implements Comparable<Subject> {
   String subjectName;
   String type;
   int course;

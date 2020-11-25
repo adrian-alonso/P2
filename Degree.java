@@ -1,6 +1,6 @@
 package p2;
 
-public class Degree {
+public class Degree implements Comparable<Degree> {
   String degreeName;
   String scope;
   int course;

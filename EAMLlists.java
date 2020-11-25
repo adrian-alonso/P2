@@ -34,17 +34,100 @@ public class EAMLlists {
   }
 
   public ArrayList<Subject> getC1Subjects(String degree) {
-    // if () {
-    //
-    // } else {
-      ArrayList<Subject> subjectsList = new ArrayList<Subject>();
-    //}
-    //ordenar subjectsList;
+    ArrayList<Subject> subjectsList = new ArrayList<Subject>();
+
+    try {
+      Document doc = docsMap.get(degree);
+
+      //Obtenemos el NodeList de los cursos
+      Element coursesNode = doc.getDocumentElement();
+      NodeList courses = coursesNode.getElementsByTagName("Course");
+
+      for (int i = 0; i < courses.getLength(); i++) {
+        //Curso
+        Element course = (Element)courses.item(i);
+
+        //Obtenemos el curso
+        int courseNumber = course.getAttribute("number").getIntValue();
+
+        //Obtenemos el NodeList de las asignaturas
+        NodeList subjects = course.getElementsByTagName("Subject");
+
+        //Obtenemos los datos de todas las asignaturas
+        for (int j = 0; j < subjects.getLength(); j++) {
+          Element subject = (Element)subjects.item(j);
+
+          //Obtenemos los atributos
+          String idSub = subject.getAttribute("idSub");
+          String type = subject.getAttribute("type");
+
+          //Obtenemos los elementos
+          XPathFactory xpathfactory = XPathFactory.newInstance();
+          XPath xpath = xpathfactory.newXPath();
+
+          //Nombre
+          String nameEXP = "/Course/Subject[@idSub=\"" + idSub + "\"]/Name";
+          NodeList names = (NodeList)xpath.evaluate(nameEXP, doc, XPathConstants.NODESET);
+          String subjectName = ((Element)names.item(0)).getTextContent().trim();
+
+          subjectsList.add(new Subject(subjectName, courseNumber, type, idSub));
+        }
+      }
+
+    } catch (Exception e) {
+
+    }
+
+    //Ordenar
     return subjectsList;
   }
 
   public ArrayList<Student> getC1Students(String degree, String subject) {
     ArrayList<Student> studentsList = new ArrayList<Student>();
+
+    try {
+
+      Document doc = docsMap.get(degree);
+
+      //Obtenemos los elementos
+      XPathFactory xpathfactory = XPathFactory.newInstance();
+      XPath xpath = xpathfactory.newXPath();
+
+      //Nombre
+      String studentsEXP = "/Course/Subject[Name=\"" + subject + "\"]//Student";
+      NodeList students = (NodeList)xpath.evaluate(studentsEXP, doc, XPathConstants.NODESET);
+
+      for (int i = 0; i < students.getLength(); i++) {
+        //Estudiante
+        Element student = (Element)students.item(i);
+
+        // //Obtenemos los elementos de estudiante
+        // XPathFactory xpathfactory = XPathFactory.newInstance();
+        // XPath xpath = xpathfactory.newXPath();
+
+        //Nombre
+        String nameEXP = "/Course/SubjectName=\"" + subject + "\"]/Student/Name";
+        NodeList names = (NodeList)xpath.evaluate(nameEXP, doc, XPathConstants.NODESET);
+        String studentName = ((Element)names.item(0)).getTextContent().trim();
+
+        //DNI or Resident
+        String idEXP = "/Course/SubjectName=\"" + subject + "\"]/Student/Dni | /Course/SubjectName=\"" + subject + "\"]/Student/Resident";
+        NodeList ids = (NodeList)xpath.evaluate(idEXP, doc, XPathConstants.NODESET);
+        String studentID = ((Element)ids.item(0)).getTextContent().trim();
+
+        //Grade
+        String gradeEXP = "/Course/SubjectName=\"" + subject + "\"]/Student/Grade";
+        NodeList grades = (NodeList)xpath.evaluate(gradeEXP, doc, XPathConstants.NODESET);
+        int studentGrade = Integer.toString(((Element)grades.item(0)).getTextContent().trim());
+
+        studentsList.add(new Student(studentName, studentID, studentGrade));
+      }
+
+    } catch(Exception e) {
+
+    }
+
+    Collections.sort(studentsList);
     return studentsList;
   }
 }

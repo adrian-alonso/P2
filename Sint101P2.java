@@ -42,7 +42,7 @@ public class Sint101P2 extends HttpServlet {
       //Llamo al parser
       Parser eamlParser = new Parser();
       docsMap = eamlParser.parser(servletcontext.getRealPath(xml_url), servletcontext.getRealPath(xsd_url));
-      number = eamlParser.number;
+      //number = eamlParser.number;
 
       //Obtengo avisos
       warningsFiles = eamlParser.getWarningsFiles();
@@ -108,11 +108,13 @@ public class Sint101P2 extends HttpServlet {
            break;
 
          case "12":
-           screen.phase12(req, res, pphase, pdegree);
+           ArrayList<Subject> subjects = eamlLists.getC1Subjects(pdegree);
+           screen.phase12(req, res, pphase, pdegree, subjects);
            break;
 
          case "13":
-           screen.phase13(req, res, pphase, pdegree, psubject);
+           ArrayList<Student> students = eamlLists.getC1Students(pdegree, psubject);
+           screen.phase13(req, res, pphase, pdegree, psubject, students);
            break;
 
          default:

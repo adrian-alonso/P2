@@ -56,13 +56,9 @@ public class Parser {
     ErrorHandler eamlErrorHandler = new ErrorHandler();
     db.setErrorHandler(eamlErrorHandler);
 
-    number = 1;
     Document doc = null;
-    docsMap.put(Integer.toString(number),doc);
     try {
       doc = db.parse(eamlFile);
-      number = 2;
-      docsMap.put(Integer.toString(number),doc);
     } catch(SAXException saxe) {
     } catch (IOException ioe) {
     }
