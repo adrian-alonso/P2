@@ -95,7 +95,6 @@ public class Parser {
     if (eamlErrorHandler.getWarning() == 1) {
       WarningFile warning = new WarningFile(file, eamlErrorHandler.getWarningList());
       boolean anywarning = false;
-      number = 11;
       for (int i = 0; i < warningsFiles.size(); i++) {
         if (warningsFiles.get(i).getWarningID().equals(warning.getWarningID())) {
           anywarning = true;

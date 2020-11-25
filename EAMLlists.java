@@ -7,10 +7,10 @@ import java.io.File;
 import javax.xml.xpath.*;
 import org.w3c.dom.*;
 
-
 public class EAMLlists {
   HashMap<String,Document> docsMap = new HashMap<String,Document>();
   File file;
+  int number = 0;
 
   //CONSTRUCTOR
   //Constructor por defecto
@@ -48,7 +48,7 @@ public class EAMLlists {
         Element course = (Element)courses.item(i);
 
         //Obtenemos el curso
-        int courseNumber = course.getAttribute("number").getIntValue();
+        int courseNumber = Integer.parseInt(course.getAttribute("number"));
 
         //Obtenemos el NodeList de las asignaturas
         NodeList subjects = course.getElementsByTagName("Subject");
@@ -66,7 +66,7 @@ public class EAMLlists {
           XPath xpath = xpathfactory.newXPath();
 
           //Nombre
-          String nameEXP = "/Course/Subject[@idSub=\"" + idSub + "\"]/Name";
+          String nameEXP = "/Degree/Course/Subject[@idSub=\"" + idSub + "\"]/Name";
           NodeList names = (NodeList)xpath.evaluate(nameEXP, doc, XPathConstants.NODESET);
           String subjectName = ((Element)names.item(0)).getTextContent().trim();
 
@@ -75,7 +75,7 @@ public class EAMLlists {
       }
 
     } catch (Exception e) {
-
+      System.out.println(e);
     }
 
     //Ordenar
@@ -85,6 +85,7 @@ public class EAMLlists {
   public ArrayList<Student> getC1Students(String degree, String subject) {
     ArrayList<Student> studentsList = new ArrayList<Student>();
 
+    number = 1;
     try {
 
       Document doc = docsMap.get(degree);
@@ -94,9 +95,10 @@ public class EAMLlists {
       XPath xpath = xpathfactory.newXPath();
 
       //Nombre
-      String studentsEXP = "/Course/Subject[Name=\"" + subject + "\"]//Student";
+      String studentsEXP = "/Degree/Course/Subject[Name=\"" + subject + "\"]//Student";
       NodeList students = (NodeList)xpath.evaluate(studentsEXP, doc, XPathConstants.NODESET);
 
+      number = 2;
       for (int i = 0; i < students.getLength(); i++) {
         //Estudiante
         Element student = (Element)students.item(i);
@@ -106,20 +108,24 @@ public class EAMLlists {
         // XPath xpath = xpathfactory.newXPath();
 
         //Nombre
-        String nameEXP = "/Course/SubjectName=\"" + subject + "\"]/Student/Name";
+        String nameEXP = "/Degree/Course/Subject[Name=\"" + subject + "\"]/Student/Name";
         NodeList names = (NodeList)xpath.evaluate(nameEXP, doc, XPathConstants.NODESET);
         String studentName = ((Element)names.item(0)).getTextContent().trim();
 
+        number = 21;
         //DNI or Resident
-        String idEXP = "/Course/SubjectName=\"" + subject + "\"]/Student/Dni | /Course/SubjectName=\"" + subject + "\"]/Student/Resident";
+        String idEXP = "/Degree/Course/Subject[Name=\"" + subject + "\"]/Student/Dni | /Degree/Course/Subject[Name=\"" + subject + "\"]/Student/Resident";
         NodeList ids = (NodeList)xpath.evaluate(idEXP, doc, XPathConstants.NODESET);
         String studentID = ((Element)ids.item(0)).getTextContent().trim();
 
+        number = 22;
         //Grade
-        String gradeEXP = "/Course/SubjectName=\"" + subject + "\"]/Student/Grade";
+        String gradeEXP = "/Degree/Course/Subject[Name=\"" + subject + "\"]/Student/Grade";
         NodeList grades = (NodeList)xpath.evaluate(gradeEXP, doc, XPathConstants.NODESET);
-        int studentGrade = Integer.toString(((Element)grades.item(0)).getTextContent().trim());
+        int studentGrade = Integer.parseInt(((Element)grades.item(0)).getTextContent().trim());
+        //int studentGrade = Integer.parseInt(((Element)grades.item(0)).getTextContent());
 
+        number = 3;
         studentsList.add(new Student(studentName, studentID, studentGrade));
       }
 

@@ -200,7 +200,6 @@ public class FrontEnd {
     out.println("<h2>Consulta 1: Fase 1</h2>");
     out.println("<p>Selecciona :</p>");
     out.println("<ol>");
-    out.println("<li>" + degrees.size() + "</li>");
     for (int i = 0; i < degrees.size(); i++) {
       out.println("<li><a href=\"?pphase=12&p=" + password + "&pdegree=" + degrees.get(i) + "\">" + degrees.get(i) + "</a></li>");
     }
@@ -259,6 +258,7 @@ public class FrontEnd {
   //HTML DE LA PAGINA
   public void page12HTML(HttpServletRequest request, HttpServletResponse response, String pphase, String pdegree, ArrayList<Subject> subjects) throws IOException, ServletException {
     String password = request.getParameter("p");
+    String imprimir;
 
     response.setContentType("text/html");
     PrintWriter out = response.getWriter();
@@ -275,9 +275,10 @@ public class FrontEnd {
     out.println("<h2>Consulta 1: Fase 2 (Titulaci&oacuten=" + pdegree + ")</h2>");
     out.println("<p>Selecciona una asignatura:</p>");
     out.println("<ol>");
-    out.println("<li>" + subjects.size() + "</li>");
     for (int i = 0; i < subjects.size(); i++) {
-      out.println("<li><a href=\"?pphase=13&p=" + password + "&pdegree=" + pdegree + "\"&psubject=\"" + subjects.get(i) + "\">" + subjects.get(i) + "</a></li>");
+      imprimir = "Asignatura = '" + subjects.get(i).getSubjectName() + "'";
+      out.print("<li><a href=\"?pphase=13&p=" + password + "&pdegree=" + pdegree + "&psubject=" + subjects.get(i).getSubjectName() + "\">" + imprimir + "</a>");
+      out.println(" " + subjects.get(i).toString() + "</li>");
     }
     out.println("</ol>");
     out.println("</section>");
@@ -361,6 +362,11 @@ public class FrontEnd {
     out.println("<section>");
     out.println("<h2>Consulta 1: Fase 3 (Titulaci&oacuten=" + pdegree + ", Asignatura=" + psubject + ")</h2>");
     out.println("<p>Este es el resultado:</p>");
+    out.println("<ol>");
+    for (int i = 0; i < students.size(); i++) {
+      out.println("<li>" + students.get(i).toString() + "</li>");
+    }
+    out.println("</ol>");
     out.println("</section>");
     out.println("<section>");
     // out.println("<form name=\"form\" method=\"get\">");

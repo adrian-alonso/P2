@@ -114,6 +114,7 @@ public class Sint101P2 extends HttpServlet {
 
          case "13":
            ArrayList<Student> students = eamlLists.getC1Students(pdegree, psubject);
+           number = eamlLists.number;
            screen.phase13(req, res, pphase, pdegree, psubject, students);
            break;
 
