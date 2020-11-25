@@ -22,20 +22,18 @@ public class Parser {
   ArrayList<ErrorFile> errorsFiles = new ArrayList<ErrorFile>();
   ArrayList<FatalErrorFile> fatalErrorsFiles = new ArrayList<FatalErrorFile>();
 
-  int number;
-
   //CONSTRUCTOR
   public Parser() {
   }
 
   //METODOS
-  public HashMap<String,Document> parser(String file) {
+  public HashMap<String,Document> parser(String file_xml, String file_xsd) {
     DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
     dbf.setValidating(true);
     dbf.setNamespaceAware(true);
 
     dbf.setAttribute(JAXP_SCHEMA_LANGUAGE,W3C_XML_SCHEMA);
-    dbf.setAttribute(JAXP_SCHEMA_SOURCE,file);
+    dbf.setAttribute(JAXP_SCHEMA_SOURCE,file_xsd);
 
     DocumentBuilder db = null;
     try {
@@ -43,7 +41,7 @@ public class Parser {
     } catch(ParserConfigurationException pce) {
     }
 
-    boolean moreEAML = searchEAML(file, db);
+    boolean moreEAML = searchEAML(file_xml, db);
     while (moreEAML == true) {
       moreEAML = searchEAML(nextFile, db);
     }
@@ -76,25 +74,15 @@ public class Parser {
 
     String degree = null;
     try {
-      number = 3;
 
-      docsMap.put(Integer.toString(number),doc);
       //Obtenemos el grado
       NodeList degreenode = doc.getElementsByTagName("Name");
-      docsMap.put(((Element)degreenode.item(0)).getTextContent(),doc);
-      //NodeList degreenode = (NodeList)xpath.evaluate("//Degree",doc,XPathConstants.NODESET);
       degree = ((Element)degreenode.item(0)).getTextContent();
-      docsMap.put(degree,doc);
-      //degree = ((Element)degreenode.item(0)).getElementsByTagName("Name");
 
-      number = 4;
-      docsMap.put(Integer.toString(number),doc);
       //Obtenemos los nodos eaml
       NodeList eamlnodes = (NodeList)xpath.evaluate(exp, doc, XPathConstants.NODESET);
       filesList.add(file);
 
-      number = 5;
-      docsMap.put(Integer.toString(number),doc);
       //Buscamos mas ficheros EAML
       for (int i = 0; i < eamlnodes.getLength(); i++) {
         nextFile = eamlnodes.item(i).getTextContent();
@@ -111,6 +99,7 @@ public class Parser {
     if (eamlErrorHandler.getWarning() == 1) {
       WarningFile warning = new WarningFile(file, eamlErrorHandler.getWarningList());
       boolean anywarning = false;
+      number = 11;
       for (int i = 0; i < warningsFiles.size(); i++) {
         if (warningsFiles.get(i).getWarningID().equals(warning.getWarningID())) {
           anywarning = true;
@@ -125,7 +114,6 @@ public class Parser {
     if (eamlErrorHandler.getError() == 1) {
       ErrorFile error = new ErrorFile(file, eamlErrorHandler.getErrorList());
       boolean anyerror = false;
-      System.out.println("ID: " + error.toString() + " Error: " + eamlErrorHandler.getErrorList());
       for (int i = 0; i < errorsFiles.size(); i++) {
         if (errorsFiles.get(i).getErrorID().equals(error.getErrorID())) {
           anyerror = true;
@@ -151,14 +139,11 @@ public class Parser {
     }
 
     //En caso de que el fichero este correcto
-    //if ((eamlErrorHandler.getWarning() == 0) && (eamlErrorHandler.getError() == 0) && (eamlErrorHandler.getFatalError() == 0)) {
-      number = 600;
-      docsMap.put(Integer.toString(number),doc);
+    if ((eamlErrorHandler.getWarning() == 0) && (eamlErrorHandler.getError() == 0) && (eamlErrorHandler.getFatalError() == 0)) {
       if ((degree != null) && (!(docsMap.containsKey(degree)))) {
         docsMap.put(degree,doc);
-        number = 700;
       }
-    //}
+    }
 
     return false;
   }
