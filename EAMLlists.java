@@ -122,7 +122,7 @@ public class EAMLlists {
         //Grade
         String gradeEXP = "/Degree/Course/Subject[Name=\"" + subject + "\"]/Student/Grade";
         NodeList grades = (NodeList)xpath.evaluate(gradeEXP, doc, XPathConstants.NODESET);
-        int studentGrade = Integer.parseInt(((Element)grades.item(0)).getTextContent().trim());
+        float studentGrade = Float.parseFloat(((Element)grades.item(0)).getTextContent().trim());
         //int studentGrade = Integer.parseInt(((Element)grades.item(0)).getTextContent());
 
         number = 3;

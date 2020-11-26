@@ -1,22 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Degree location="Vigo">
-  <Name>Teleco</Name>
-  <Scope>technology</Scope>
-  <Course number="1">
-    <Subject idSub="AO" type="core">
-      <Name>AO</Name>
-      <Student>
-        <Name>Ana Carolina Barros</Name>
-        <Dni>78534658V</Dni>
-        <Grade>6.5</Grade>
-      </Student>
-      <Student>
-        <Name>Carlota </Name>
-        <Resident>H5678904</Resident>
-        <Grade>5.0</Grade>
-      </Student>
-    </Subject>
-  </Course>
+  <Name>Biología</Name>
+  <Scope>science</Scope>
   <Course number="2">
     <Subject idSub="PDS" type="core">
       <Name>PDS</Name>
@@ -57,17 +42,6 @@
         <Name>Adrián Alonso Vilar</Name>
         <Dni>35488995H</Dni>
         <Grade>7.2</Grade>
-      </Student>
-    </Subject>
-  </Course>
-  <Course number="4">
-    <Subject idSub="DAM" type="optional">
-      <Name>DAM</Name>
-      <Student>
-        <Name>Adrián Alonso Vilar</Name>
-        <Dni>35488995H</Dni>
-        <Grade>7.68</Grade>
-        <EAML>/bilogia.xml</EAML>
       </Student>
     </Subject>
   </Course>

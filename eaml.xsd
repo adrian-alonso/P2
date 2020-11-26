@@ -96,7 +96,7 @@
       </xs:restriction>
     </xs:simpleType>
   </xs:element>
-  <!-- AÑADIR DIRECCION ALUMNO -->
+
   <xs:element name="Grade">
     <xs:simpleType>
       <xs:restriction base="xs:decimal">

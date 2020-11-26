@@ -3,7 +3,7 @@ package p2;
 public class Student implements Comparable<Student> {
   String studentName;
   String id;
-  int grade;
+  float grade;
   String address;
 
   //CONSTRUCTORES
@@ -12,14 +12,14 @@ public class Student implements Comparable<Student> {
   }
 
   //Constructor comun
-  public Student(String studentName, String id, int grade, String address) {
+  public Student(String studentName, String id, float grade, String address) {
     this.studentName = studentName;
     this.id = id;
     this.grade = grade;
     this.address = address;
   }
 
-  public Student(String studentName, String id, int grade) {
+  public Student(String studentName, String id, float grade) {
     this.studentName = studentName;
     this.id = id;
     this.grade = grade;
@@ -34,7 +34,7 @@ public class Student implements Comparable<Student> {
     return id;
   }
 
-  public int getGrade() {
+  public float getGrade() {
     return grade;
   }
 
