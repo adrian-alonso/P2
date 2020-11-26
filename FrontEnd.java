@@ -357,10 +357,10 @@ public class FrontEnd {
     out.println("</head>");
     out.println("<body>");
     out.println("<header>");
-    out.println("<h1>Servicio de consulta de expedientes acad&eacutemicos</h1>");
+    out.println("<h1>Servicio de consulta de expedientes acad&eacute;micos</h1>");
     out.println("</header>");
     out.println("<section>");
-    out.println("<h2>Consulta 1: Fase 3 (Titulaci&oacuten=" + pdegree + ", Asignatura=" + psubject + ")</h2>");
+    out.println("<h2>Consulta 1: Fase 3 (Titulaci&oacute;n=" + pdegree + ", Asignatura=" + psubject + ")</h2>");
     out.println("<p>Este es el resultado:</p>");
     out.println("<ol>");
     for (int i = 0; i < students.size(); i++) {
@@ -374,11 +374,11 @@ public class FrontEnd {
     // out.println("<input type=\"submit\" class=\"backButton\" value=\"Atrás\" onclick=\"pphase.value=\"12\"\">");
     // out.println("</form>");
     out.println("<a href=\"?pphase=01&p=" + password + "\">Inicio</a>");
-    out.println("<a href=\"?pphase=12&p=" + password + "&pdegree=" + pdegree + "\">Atr&aacutes</a>");
+    out.println("<a href=\"?pphase=12&p=" + password + "&pdegree=" + pdegree + "\">Atr&aacute;s</a>");
     out.println("</section>");
     out.println("<footer>");
     out.println("<hr>");
-    out.println("<p>&copy Adri&aacuten Alonso Vilar (2020-2021)</p>");
+    out.println("<p>&copy Adri&aacute;n Alonso Vilar (2020-2021)</p>");
     out.println("</footer>");
     out.println("</body>");
     out.println("</html>");

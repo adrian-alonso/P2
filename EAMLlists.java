@@ -103,30 +103,43 @@ public class EAMLlists {
         //Estudiante
         Element student = (Element)students.item(i);
 
-        // //Obtenemos los elementos de estudiante
-        // XPathFactory xpathfactory = XPathFactory.newInstance();
-        // XPath xpath = xpathfactory.newXPath();
-
         //Nombre
         String nameEXP = "/Degree/Course/Subject[Name=\"" + subject + "\"]/Student/Name";
         NodeList names = (NodeList)xpath.evaluate(nameEXP, doc, XPathConstants.NODESET);
-        String studentName = ((Element)names.item(0)).getTextContent().trim();
+        String studentName = ((Element)names.item(i)).getTextContent().trim();
 
         number = 21;
         //DNI or Resident
         String idEXP = "/Degree/Course/Subject[Name=\"" + subject + "\"]/Student/Dni | /Degree/Course/Subject[Name=\"" + subject + "\"]/Student/Resident";
         NodeList ids = (NodeList)xpath.evaluate(idEXP, doc, XPathConstants.NODESET);
-        String studentID = ((Element)ids.item(0)).getTextContent().trim();
+        String studentID = ((Element)ids.item(i)).getTextContent().trim();
 
         number = 22;
         //Grade
         String gradeEXP = "/Degree/Course/Subject[Name=\"" + subject + "\"]/Student/Grade";
         NodeList grades = (NodeList)xpath.evaluate(gradeEXP, doc, XPathConstants.NODESET);
-        float studentGrade = Float.parseFloat(((Element)grades.item(0)).getTextContent().trim());
-        //int studentGrade = Integer.parseInt(((Element)grades.item(0)).getTextContent());
+        float studentGrade = Float.parseFloat(((Element)grades.item(i)).getTextContent().trim());
 
-        number = 3;
-        studentsList.add(new Student(studentName, studentID, studentGrade));
+        //Address
+        // String addressEXP = "/Degree/Course/Subject[Name=\"" + subject + "\"]/Student";
+        // NodeList addressNode = (NodeList)xpath.evaluate(addressEXP, doc, XPathConstants.NODESET);
+        // String address = ((Element)addressNode.item(i)).getTextContent();
+
+        NodeList studentChildNodes = student.getChildNodes();
+        String address = null;
+        for (int j = 0; j < studentChildNodes.getLength(); j++) {
+          Node addressNode = studentChildNodes.item(j);
+          //if (addressNode.getNodeType() == org.w3c.dom.Node.TEXT_NODE) {
+          if (addressNode.getNodeType() == Node.TEXT_NODE) {
+            if ((addressNode.getNodeValue() != "") && (addressNode.getNodeValue() != null)) {
+              address = addressNode.getNodeValue();
+              address = address.trim();
+            }
+            number = 87765;
+          }
+        }
+
+        studentsList.add(new Student(studentName, studentID, studentGrade, address));
       }
 
     } catch(Exception e) {

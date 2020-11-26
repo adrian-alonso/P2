@@ -43,6 +43,7 @@
       <Student>
         <Name>Adrián Alonso</Name>
         <Dni>35488995H</Dni>
+        Calle Silleda, 1
         <Grade>7.6</Grade>
       </Student>
     </Subject>
@@ -67,7 +68,7 @@
         <Name>Adrián Alonso Vilar</Name>
         <Dni>35488995H</Dni>
         <Grade>7.68</Grade>
-        <EAML>/bilogia.xml</EAML>
+        <EAML>/p2/biologia.xml</EAML>
       </Student>
     </Subject>
   </Course>

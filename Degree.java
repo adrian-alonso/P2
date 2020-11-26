@@ -45,9 +45,9 @@ public class Degree implements Comparable<Degree> {
   //METODO TOSTRING
   public String toString() {
     if (location == null) {
-      return  " --- Curso = '" + course + "' --- Ámbito = '" + scope + "'";
+      return " --- Curso = '" + course + "' --- &Aacute;mbito = '" + scope + "'";
     } else {
-      return " --- Curso = '" + course + "' --- Ámbito = '" + scope + "' --- Campus = '" + location + "'";
+      return " --- Curso = '" + course + "' --- &Aacute;mbito = '" + scope + "' --- Campus = '" + location + "'";
     }
   }
 

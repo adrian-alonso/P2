@@ -45,9 +45,9 @@ public class Student implements Comparable<Student> {
   //METODO TOSTRING
   public String toString() {
     if (address == null) {
-      return "Nombre = '" + studentName + "' --- ID = '" + id + "' --- Dirección = ''";
+      return "Nombre = '" + studentName + "' --- ID = '" + id + "'";
     } else {
-      return "Nombre = '" + studentName + "' --- ID = '" + id + "' --- Dirección = '" + address + "'";
+      return "Nombre = '" + studentName + "' --- ID = '" + id + "' --- Direcci&oacute;n = '" + address + "'";
     }
   }
 

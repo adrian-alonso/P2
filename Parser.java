@@ -7,6 +7,7 @@ import javax.xml.parsers.*;
 import javax.xml.xpath.*;
 import org.w3c.dom.*;
 import org.xml.sax.*;
+import javax.servlet.*;
 
 public class Parser {
   String JAXP_SCHEMA_LANGUAGE = "http://java.sun.com/xml/jaxp/properties/schemaLanguage";
@@ -27,7 +28,7 @@ public class Parser {
   }
 
   //METODOS
-  public HashMap<String,Document> parser(String file_xml, String file_xsd) {
+  public HashMap<String,Document> parser(String file_xml, String file_xsd, ServletContext servletcontext) {
     DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
     dbf.setValidating(true);
     dbf.setNamespaceAware(true);
@@ -41,16 +42,17 @@ public class Parser {
     } catch(ParserConfigurationException pce) {
     }
 
-    boolean moreEAML = searchEAML(file_xml, db);
+    boolean moreEAML = searchEAML(file_xml, db, servletcontext);
     while (moreEAML == true) {
-      moreEAML = searchEAML(nextFile, db);
+      moreEAML = searchEAML(nextFile, db, servletcontext);
     }
 
     return docsMap;
   }
 
-  public boolean searchEAML(String file, DocumentBuilder db) {
+  public boolean searchEAML(String file, DocumentBuilder db, ServletContext servletcontext) {
     File eamlFile = new File(file);
+    boolean moreFiles = false;
 
     //Llama gestor de errores
     ErrorHandler eamlErrorHandler = new ErrorHandler();
@@ -60,7 +62,11 @@ public class Parser {
     try {
       doc = db.parse(eamlFile);
     } catch(SAXException saxe) {
+      System.out.println(saxe);
     } catch (IOException ioe) {
+      System.out.println(ioe);
+    } catch (Exception e) {
+      System.out.println(e);
     }
 
     //Obtenemos archivos EAML
@@ -79,16 +85,22 @@ public class Parser {
       NodeList eamlnodes = (NodeList)xpath.evaluate(exp, doc, XPathConstants.NODESET);
       filesList.add(file);
 
+
       //Buscamos mas ficheros EAML
       for (int i = 0; i < eamlnodes.getLength(); i++) {
-        nextFile = eamlnodes.item(i).getTextContent();
+        String nextFile_url = ((Element)eamlnodes.item(i)).getTextContent();
+        nextFile = servletcontext.getRealPath(nextFile_url);
         if (!filesList.contains(nextFile)) {
-            return true;
+            moreFiles = true;
         }
       }
 
     } catch(NullPointerException npe) {
+      System.out.println(npe);
     } catch (XPathExpressionException xpe_e) {
+      System.out.println(xpe_e);
+    } catch (Exception e) {
+      System.out.println(e);
     }
 
     //En caso de warnings
@@ -140,7 +152,7 @@ public class Parser {
       }
     }
 
-    return false;
+    return moreFiles;
   }
 
   //METODOS PARA OBTENER LAS LISTAS

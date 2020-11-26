@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Degree location="Vigo">
-  <Name>Biología</Name>
+  <Name>Biologia</Name>
   <Scope>science</Scope>
   <Course number="2">
     <Subject idSub="PDS" type="core">
