@@ -250,7 +250,7 @@ public class FrontEnd {
       } else if (!auto.equals("true")) {
         this.page12HTML(request, response, pphase, pdegree, subjects);
       } else {
-        this.page12XML(request, response, pphase, pdegree);
+        this.page12XML(request, response, pphase, pdegree, subjects);
       }
     }
   }
@@ -299,15 +299,15 @@ public class FrontEnd {
   }
 
   //MODO AUTO: PRESENTACION EN XML
-  public void page12XML(HttpServletRequest request, HttpServletResponse response, String pphase, String pdegree/*, ArrayList<Subject> subjects*/) throws IOException, ServletException {
+  public void page12XML(HttpServletRequest request, HttpServletResponse response, String pphase, String pdegree, ArrayList<Subject> subjects) throws IOException, ServletException {
     response.setContentType("text/xml");
     PrintWriter out = response.getWriter();
 
     out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
     out.println("<subjects>");
-    /*for (int i=0; i<subjects.size(); i++){
-      out.println("<subject course=\"" + subjects.get(i).getCourse + "\" type=\"" + subjects.get(i).getType + "\">" + subjects.get(i).getSubjectName + "</subject>");
-    }*/
+    for (int i=0; i<subjects.size(); i++){
+      out.println("<subject course=\"" + subjects.get(i).getCourse() + "\" type=\"" + subjects.get(i).getType() + "\">" + subjects.get(i).getSubjectName() + "</subject>");
+    }
     out.println("</subjects>");
   }
 
@@ -338,7 +338,7 @@ public class FrontEnd {
         } else if (!auto.equals("true")) {
           this.page13HTML(request, response, pphase, pdegree, psubject, students);
         } else {
-          this.page13XML(request, response, pphase, pdegree, psubject);
+          this.page13XML(request, response, pphase, pdegree, psubject, students);
         }
       }
     }
@@ -385,15 +385,15 @@ public class FrontEnd {
   }
 
   //MODO AUTO: PRESENTACION EN XML
-  public void page13XML(HttpServletRequest request, HttpServletResponse response, String pphase, String pdegree, String psubject/*, ArrayList<Student> students*/) throws IOException, ServletException {
+  public void page13XML(HttpServletRequest request, HttpServletResponse response, String pphase, String pdegree, String psubject, ArrayList<Student> students) throws IOException, ServletException {
     response.setContentType("text/xml");
     PrintWriter out = response.getWriter();
 
     out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
     out.println("<students>");
-    /*for (int i=0; i<student.size(); i++){
-      out.println("<student course=\"" + student.get(i).getCourse + "\" type=\"" + student.get(i).getType + "\">" + student.get(i).getSubjectName + "</student>");
-    }*/
+    for (int i=0; i<students.size(); i++){
+      out.println("<student id=\"" + students.get(i).getId() + "\" address=\"" + students.get(i).getAddress() + "\">" + students.get(i).getStudentName() + "</student>");
+    }
     out.println("</students>");
   }
 
