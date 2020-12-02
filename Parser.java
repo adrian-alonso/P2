@@ -6,7 +6,8 @@ import java.io.*;
 import javax.xml.parsers.*;
 import javax.xml.xpath.*;
 import org.w3c.dom.*;
-import org.xml.sax.*;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 import javax.servlet.*;
 
 public class Parser {
@@ -62,11 +63,10 @@ public class Parser {
     try {
       doc = db.parse(eamlFile);
     } catch(SAXException saxe) {
-      System.out.println(saxe);
+      System.out.println("1: " + saxe);
+      //eamlErrorHandler.warning()
     } catch (IOException ioe) {
-      System.out.println(ioe);
-    } catch (Exception e) {
-      System.out.println(e);
+      System.out.println("2: " + ioe);
     }
 
     //Obtenemos archivos EAML
@@ -74,35 +74,39 @@ public class Parser {
     XPath xpath = xpathfactory.newXPath();
     String exp = "//EAML";
 
+    System.out.println(eamlErrorHandler.getWarning() + " " + eamlErrorHandler.getError() + " " + eamlErrorHandler.getFatalError());
     String degree = null;
     try {
 
       //Obtenemos el grado
       NodeList degreenode = doc.getElementsByTagName("Name");
       degree = ((Element)degreenode.item(0)).getTextContent();
-
+      System.out.println('1');
       //Obtenemos los nodos eaml
       NodeList eamlnodes = (NodeList)xpath.evaluate(exp, doc, XPathConstants.NODESET);
       filesList.add(file);
-
+      System.out.println('2');
 
       //Buscamos mas ficheros EAML
       for (int i = 0; i < eamlnodes.getLength(); i++) {
+        System.out.println('3');
         String nextFile_url = ((Element)eamlnodes.item(i)).getTextContent();
         nextFile = servletcontext.getRealPath(nextFile_url);
+        System.out.println('4');
         if (!filesList.contains(nextFile)) {
             moreFiles = true;
+            System.out.println('5');
         }
       }
+      System.out.println('6');
 
     } catch(NullPointerException npe) {
-      System.out.println(npe);
+      System.out.println("3: " + npe);
     } catch (XPathExpressionException xpe_e) {
-      System.out.println(xpe_e);
-    } catch (Exception e) {
-      System.out.println(e);
+      System.out.println("4: " + xpe_e);
     }
 
+    System.out.println(eamlErrorHandler.getWarning() + " " + eamlErrorHandler.getError() + " " + eamlErrorHandler.getFatalError());
     //En caso de warnings
     if (eamlErrorHandler.getWarning() == 1) {
       WarningFile warning = new WarningFile(file, eamlErrorHandler.getWarningList());
@@ -112,8 +116,10 @@ public class Parser {
           anywarning = true;
         }
       }
+      System.out.println(anywarning);
       if (!anywarning) {
         warningsFiles.add(warning);
+        System.out.println(warningsFiles);
       }
     }
 
@@ -126,8 +132,10 @@ public class Parser {
           anyerror = true;
         }
       }
+      System.out.println(anyerror);
       if (!anyerror) {
         errorsFiles.add(error);
+        System.out.println(errorsFiles);
       }
     }
 
@@ -140,8 +148,10 @@ public class Parser {
           anyfatalerror = true;
         }
       }
+      System.out.println(anyfatalerror);
       if (!anyfatalerror) {
         fatalErrorsFiles.add(fatalerror);
+        System.out.println(fatalErrorsFiles);
       }
     }
 

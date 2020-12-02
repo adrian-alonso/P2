@@ -92,7 +92,7 @@ public class FrontEnd {
     } else if (!auto.equals("true")) {
       this.page02HTML(request, response, pphase, warningsFiles, errorsFiles, fatalErrorsFiles);
     } else {
-      this.page02XML(request, response, pphase);
+      this.page02XML(request, response, pphase, warningsFiles, errorsFiles, fatalErrorsFiles);
     }
   }
 
@@ -156,12 +156,44 @@ public class FrontEnd {
   }
 
   //MODO AUTO: PRESENTACION EN XML
-  public void page02XML(HttpServletRequest request, HttpServletResponse response, String pphase) throws IOException, ServletException {
+  public void page02XML(HttpServletRequest request, HttpServletResponse response, String pphase, ArrayList<WarningFile> warningsFiles, ArrayList<ErrorFile> errorsFiles, ArrayList<FatalErrorFile> fatalErrorsFiles) throws IOException, ServletException {
     response.setContentType("text/xml");
     PrintWriter out = response.getWriter();
 
     out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-    out.println("");
+    out.println("<wrongDocs>");
+    out.println("<warnings>");
+    for (int i = 0; i < warningsFiles.size(); i++){
+      for (int j = 0; j < warningsFiles.get(i).getWarnings().size(); j++){
+        out.println("<warning>");
+        out.println("<file>" + warningsFiles.get(i).getWarningID() + "</file>");
+        out.println("<cause>" + warningsFiles.get(i).getWarnings().get(j) + "</cause>");
+        out.println("</warning>");
+      }
+    }
+    out.println("</warnings>");
+    out.println("<errors>");
+    for (int i = 0; i < errorsFiles.size(); i++){
+      for (int j = 0; j < errorsFiles.get(i).getErrors().size(); j++){
+        out.println("<error>");
+        out.println("<file>" + errorsFiles.get(i).getErrorID() + "</file>");
+        out.println("<cause>" + errorsFiles.get(i).getErrors().get(j) + "</cause>");
+        out.println("</error>");
+      }
+    }
+    out.println("</errors>");
+    out.println("<fatalerrors>");
+    for (int i = 0; i < fatalErrorsFiles.size(); i++){
+      for (int j = 0; j < fatalErrorsFiles.get(i).getFatalErrors().size(); j++){
+        out.println("<fatalerror>");
+        out.println("<file>" + fatalErrorsFiles.get(i).getFatalErrorID() + "</file>");
+        out.println("<cause>" + fatalErrorsFiles.get(i).getFatalErrors().get(j) + "</cause>");
+        out.println("</fatalerror>");
+      }
+    }
+    out.println("</fatalerrors>");
+    out.println("</wrongDocs>");
+
   }
 
   //FASE 11

@@ -3,6 +3,7 @@ package p2;
 import java.util.ArrayList;
 import org.xml.sax.helpers.DefaultHandler;
 import org.xml.sax.SAXParseException;
+import org.xml.sax.SAXException;
 
 public class ErrorHandler extends DefaultHandler {
     //Contadores para el numero de excepciones
@@ -19,15 +20,20 @@ public class ErrorHandler extends DefaultHandler {
     }
 
     //Metodos para guardar errores detectados en las listas
-    public void warning(SAXParseException eWarning) {
+    @Override
+    public void warning(SAXParseException eWarning) throws SAXException {
       warningList.add(eWarning.toString());
       warning = 1;
     }
-    public void error(SAXParseException eError) {
+
+    @Override
+    public void error(SAXParseException eError) throws SAXException {
       errorList.add(eError.toString());
       error = 1;
     }
-    public void fatalerror(SAXParseException eFatalError) {
+
+    @Override
+    public void fatalError(SAXParseException eFatalError) throws SAXException {
       fatalErrorList.add(eFatalError.toString());
       fatalError = 1;
     }

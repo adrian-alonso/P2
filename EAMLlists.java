@@ -121,22 +121,24 @@ public class EAMLlists {
         float studentGrade = Float.parseFloat(((Element)grades.item(i)).getTextContent().trim());
 
         //Address
-        // String addressEXP = "/Degree/Course/Subject[Name=\"" + subject + "\"]/Student";
-        // NodeList addressNode = (NodeList)xpath.evaluate(addressEXP, doc, XPathConstants.NODESET);
-        // String address = ((Element)addressNode.item(i)).getTextContent();
+        Node studentNode = students.item(i);
+        NodeList studentChildNodes = studentNode.getChildNodes();
 
-        NodeList studentChildNodes = student.getChildNodes();
         String address = null;
+        String textLine = null;
         for (int j = 0; j < studentChildNodes.getLength(); j++) {
           Node addressNode = studentChildNodes.item(j);
-          //if (addressNode.getNodeType() == org.w3c.dom.Node.TEXT_NODE) {
+
           if (addressNode.getNodeType() == Node.TEXT_NODE) {
-            if ((addressNode.getNodeValue() != "") && (addressNode.getNodeValue() != null)) {
-              address = addressNode.getNodeValue();
-              address = address.trim();
+            if (addressNode.getNodeValue() != null) {
+              textLine = addressNode.getNodeValue();
+              textLine = textLine.trim();
+              if (!textLine.equals("")) {
+                address = textLine;
+              }
             }
-            number = 87765;
           }
+
         }
 
         studentsList.add(new Student(studentName, studentID, studentGrade, address));
