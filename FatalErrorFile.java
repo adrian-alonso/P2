@@ -19,16 +19,16 @@ public class FatalErrorFile implements Comparable<FatalErrorFile> {
 
   //METODOS
   public String getFatalErrorID() {
-    return fatalErrorID;
+    return this.fatalErrorID;
   }
 
   public ArrayList<String> getFatalErrors() {
-    return fatalErrors;
+    return this.fatalErrors;
   }
 
   //Metodo toString
   public String toString() {
-    return fatalErrorID;
+    return this.fatalErrorID;
   }
 
   public int compareTo(FatalErrorFile fatalerrorfile) {

@@ -19,16 +19,16 @@ public class WarningFile implements Comparable<WarningFile>{
 
   //METODOS
   public String getWarningID() {
-    return warningID;
+    return this.warningID;
   }
 
   public ArrayList<String> getWarnings() {
-    return warnings;
+    return this.warnings;
   }
 
   //Metodo toString
   public String toString() {
-    return warningID;
+    return this.warningID;
   }
 
   public int compareTo(WarningFile warningfile) {

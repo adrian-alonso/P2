@@ -5,7 +5,7 @@ import org.xml.sax.helpers.DefaultHandler;
 import org.xml.sax.SAXParseException;
 import org.xml.sax.SAXException;
 
-public class ErrorHandler extends DefaultHandler {
+public class EAML_ErrorHandler extends DefaultHandler {
     //Contadores para el numero de excepciones
     int error = 0;
     int warning = 0;
@@ -16,7 +16,7 @@ public class ErrorHandler extends DefaultHandler {
     ArrayList<String> errorList = new ArrayList<String>();
     ArrayList<String> fatalErrorList = new ArrayList<String>();
 
-    public ErrorHandler() {
+    public EAML_ErrorHandler() {
     }
 
     //Metodos para guardar errores detectados en las listas

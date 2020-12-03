@@ -12,23 +12,26 @@ public class ErrorFile implements Comparable<ErrorFile> {
   }
 
   //Constructor comun
-  public ErrorFile(String errorID, ArrayList<String> errrors) {
+  public ErrorFile(String errorID, ArrayList<String> errors) {
     this.errorID = errorID;
-    this.errors = errors;
+    for (int i = 0; i < errors.size(); i++) {
+      this.errors.add(errors.get(i));
+    }
+
   }
 
   //METODOS
   public String getErrorID() {
-    return errorID;
+    return this.errorID;
   }
 
   public ArrayList<String> getErrors() {
-    return errors;
+    return this.errors;
   }
 
   //Metodo toString
   public String toString() {
-    return errorID;
+    return this.errorID;
   }
 
   public int compareTo(ErrorFile errorfile) {

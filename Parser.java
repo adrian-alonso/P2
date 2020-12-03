@@ -56,17 +56,15 @@ public class Parser {
     boolean moreFiles = false;
 
     //Llama gestor de errores
-    ErrorHandler eamlErrorHandler = new ErrorHandler();
-    db.setErrorHandler(eamlErrorHandler);
+    EAML_ErrorHandler eaml_ErrorHandler = new EAML_ErrorHandler();
+    db.setErrorHandler(eaml_ErrorHandler);
 
     Document doc = null;
     try {
       doc = db.parse(eamlFile);
     } catch(SAXException saxe) {
       System.out.println("1: " + saxe);
-      //eamlErrorHandler.warning()
     } catch (IOException ioe) {
-      System.out.println("2: " + ioe);
     }
 
     //Obtenemos archivos EAML
@@ -74,42 +72,32 @@ public class Parser {
     XPath xpath = xpathfactory.newXPath();
     String exp = "//EAML";
 
-    System.out.println(eamlErrorHandler.getWarning() + " " + eamlErrorHandler.getError() + " " + eamlErrorHandler.getFatalError());
     String degree = null;
     try {
 
       //Obtenemos el grado
       NodeList degreenode = doc.getElementsByTagName("Name");
       degree = ((Element)degreenode.item(0)).getTextContent();
-      System.out.println('1');
       //Obtenemos los nodos eaml
       NodeList eamlnodes = (NodeList)xpath.evaluate(exp, doc, XPathConstants.NODESET);
       filesList.add(file);
-      System.out.println('2');
 
       //Buscamos mas ficheros EAML
       for (int i = 0; i < eamlnodes.getLength(); i++) {
-        System.out.println('3');
         String nextFile_url = ((Element)eamlnodes.item(i)).getTextContent();
         nextFile = servletcontext.getRealPath(nextFile_url);
-        System.out.println('4');
         if (!filesList.contains(nextFile)) {
             moreFiles = true;
-            System.out.println('5');
         }
       }
-      System.out.println('6');
 
     } catch(NullPointerException npe) {
-      System.out.println("3: " + npe);
     } catch (XPathExpressionException xpe_e) {
-      System.out.println("4: " + xpe_e);
     }
 
-    System.out.println(eamlErrorHandler.getWarning() + " " + eamlErrorHandler.getError() + " " + eamlErrorHandler.getFatalError());
     //En caso de warnings
-    if (eamlErrorHandler.getWarning() == 1) {
-      WarningFile warning = new WarningFile(file, eamlErrorHandler.getWarningList());
+    if (eaml_ErrorHandler.getWarning() == 1) {
+      WarningFile warning = new WarningFile(file, eaml_ErrorHandler.getWarningList());
       boolean anywarning = false;
       for (int i = 0; i < warningsFiles.size(); i++) {
         if (warningsFiles.get(i).getWarningID().equals(warning.getWarningID())) {
@@ -119,13 +107,13 @@ public class Parser {
       System.out.println(anywarning);
       if (!anywarning) {
         warningsFiles.add(warning);
-        System.out.println(warningsFiles);
       }
     }
 
     //En caso de errores
-    if (eamlErrorHandler.getError() == 1) {
-      ErrorFile error = new ErrorFile(file, eamlErrorHandler.getErrorList());
+    if (eaml_ErrorHandler.getError() == 1) {
+      ErrorFile error = new ErrorFile(file, eaml_ErrorHandler.getErrorList());
+      System.out.println(eaml_ErrorHandler.getErrorList());
       boolean anyerror = false;
       for (int i = 0; i < errorsFiles.size(); i++) {
         if (errorsFiles.get(i).getErrorID().equals(error.getErrorID())) {
@@ -136,12 +124,13 @@ public class Parser {
       if (!anyerror) {
         errorsFiles.add(error);
         System.out.println(errorsFiles);
+        System.out.println(error.getErrors());
       }
     }
 
     //En caso de errores fatales
-    if (eamlErrorHandler.getFatalError() == 1) {
-      FatalErrorFile fatalerror = new FatalErrorFile(file, eamlErrorHandler.getFatalErrorList());
+    if (eaml_ErrorHandler.getFatalError() == 1) {
+      FatalErrorFile fatalerror = new FatalErrorFile(file, eaml_ErrorHandler.getFatalErrorList());
       boolean anyfatalerror = false;
       for (int i = 0; i < fatalErrorsFiles.size(); i++) {
         if (fatalErrorsFiles.get(i).getFatalErrorID().equals(fatalerror.getFatalErrorID())) {
@@ -156,7 +145,7 @@ public class Parser {
     }
 
     //En caso de que el fichero este correcto
-    if ((eamlErrorHandler.getWarning() == 0) && (eamlErrorHandler.getError() == 0) && (eamlErrorHandler.getFatalError() == 0)) {
+    if ((eaml_ErrorHandler.getWarning() == 0) && (eaml_ErrorHandler.getError() == 0) && (eaml_ErrorHandler.getFatalError() == 0)) {
       if ((degree != null) && (!(docsMap.containsKey(degree)))) {
         docsMap.put(degree,doc);
       }

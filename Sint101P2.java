@@ -49,9 +49,11 @@ public class Sint101P2 extends HttpServlet {
       //Obtengo errores
       errorsFiles = eamlParser.getErrorsFiles();
       Collections.sort(errorsFiles);
+      System.out.println("Error: " + errorsFiles.get(0).getErrors());
       //Obtengo errores fatales
       fatalErrorsFiles = eamlParser.getFatalErrorsFiles();
       Collections.sort(fatalErrorsFiles);
+      System.out.println("Fatal: " + fatalErrorsFiles.get(0).getFatalErrors());
 
     } catch(Exception e) {
 
