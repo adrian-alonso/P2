@@ -1,0 +1,38 @@
+/* CSS */
+
+/* Color de fondo */
+body {
+  background-color: pink;
+  background-image: linear-gradient(to right, rgb(238, 131, 238), white, rgb(238, 131, 238));
+}
+
+.button {
+  color: black;
+  text-decoration: none;
+}
+
+.homeButton {
+  background-color: rgb(255, 0, 0);
+  color: black;
+  border-radius: 12px;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.backButton {
+  background-color: rgb(255, 165, 0);
+  color: black;
+  border-radius: 12px;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}

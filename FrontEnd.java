@@ -17,20 +17,20 @@ public class FrontEnd {
 
   //FASE 01
   //Seleccion modo pantalla (auto/browser)
-  public void phase01 (HttpServletRequest request, HttpServletResponse response, String pphase, int number, HashMap<String,Document> docsMap) throws IOException, ServletException {
+  public void phase01 (HttpServletRequest request, HttpServletResponse response, String pphase) throws IOException, ServletException {
     String auto = request.getParameter("auto");
 
     if(auto==null){
-      this.page01HTML(request, response, pphase, number, docsMap);
+      this.page01HTML(request, response, pphase);
     } else if (!auto.equals("true")) {
-      this.page01HTML(request, response, pphase, number, docsMap);
+      this.page01HTML(request, response, pphase);
     } else {
       this.page01XML(request, response, pphase);
     }
   }
 
   //HTML DE LA PAGINA
-  public void page01HTML(HttpServletRequest request, HttpServletResponse response, String pphase, int number, HashMap<String,Document> docsMap) throws IOException, ServletException {
+  public void page01HTML(HttpServletRequest request, HttpServletResponse response, String pphase) throws IOException, ServletException {
     String password = request.getParameter("p");
 
     response.setContentType("text/html");
@@ -40,6 +40,7 @@ public class FrontEnd {
     out.println("<html>");
     out.println("<head>");
     out.println("<title>P2EA</title>");
+    out.println("<link rel=\"stylesheet\" href=\"/sint101/p2/eaml.css\">");
     out.println("</head>");
     out.println("<body>");
     out.println("<header>");
@@ -59,9 +60,8 @@ public class FrontEnd {
     out.println("</section>");
     out.println("<section>");
     out.println("<h3>Selecciona una consulta:</h3>");
-    out.println("<a href=\"?pphase=11&p=" + password + "\">Consulta 1: Ver los alumnos de una asignatura de una titulaci&oacuten</a>");
-    out.println("<p>Number: " + number + "</p>");
-    out.println("<p>docsMap: " + docsMap + "</p>");
+    out.println("<ul>");
+    out.println("<li type=\"disc\"><a href=\"?pphase=11&p=" + password + "\">Consulta 1: Ver los alumnos de una asignatura de una titulaci&oacuten</a></li><br>");
     out.println("</section>");
     out.println("<footer>");
     out.println("<hr>");
@@ -107,6 +107,7 @@ public class FrontEnd {
     out.println("<html>");
     out.println("<head>");
     out.println("<title>P2EA</title>");
+    out.println("<link rel=\"stylesheet\" href=\"/sint101/p2/eaml.css\">");
     out.println("</head>");
     out.println("<body>");
     out.println("<header>");
@@ -145,7 +146,7 @@ public class FrontEnd {
     // out.println("<form name=\"form\" method=\"get\">");
     // out.println("<input type=\"submit\" class=\"backButton\" name=\"back\" value=\"Atrás\" onclick=\"?pphase=01\">");
     // out.println("</form>");
-    out.println("<a href=\"?pphase=01&p=" + password + "\">Atr&aacutes</a>");
+    out.println("<button class=\"backButton\"><a href=\"?pphase=01&p=" + password + "\" class=\"button\">Atr&aacutes</a></button>");
     out.println("</section>");
     out.println("<footer>");
     out.println("<hr>");
@@ -223,6 +224,7 @@ public class FrontEnd {
     out.println("<html>");
     out.println("<head>");
     out.println("<title>P2EA</title>");
+    out.println("<link rel=\"stylesheet\" href=\"/sint101/p2/eaml.css\">");
     out.println("</head>");
     out.println("<body>");
     out.println("<header>");
@@ -241,7 +243,7 @@ public class FrontEnd {
     // out.println("<form name=\"form\" method=\"get\">");
     // out.println("<input type=\"submit\" class=\"homeButton\" value=\"Inicio\" onclick=\"form.pphase.value=01\">");
     // out.println("</form>");
-    out.println("<a href=\"?pphase=01&p=" + password + "\">Inicio</a>");
+    out.println("<button class=\"homeButton\"><a href=\"?pphase=01&p=" + password + "\" class=\"button\">Inicio</a></button>");
     out.println("</section>");
     out.println("<footer>");
     out.println("<hr>");
@@ -298,6 +300,7 @@ public class FrontEnd {
     out.println("<html>");
     out.println("<head>");
     out.println("<title>P2EA</title>");
+    out.println("<link rel=\"stylesheet\" href=\"/sint101/p2/eaml.css\">");
     out.println("</head>");
     out.println("<body>");
     out.println("<header>");
@@ -319,8 +322,8 @@ public class FrontEnd {
     // out.println("<input type=\"submit\" class=\"homeButton\" value=\"Inicio\" onclick=\"form.pphase.value=01\">");
     // out.println("<input type=\"submit\" class=\"backButton\" value=\"Atrás\" onclick=\"form.pphase.value=11\">");
     // out.println("</form>");
-    out.println("<a href=\"?pphase=01&p=" + password + "\">Inicio</a>");
-    out.println("<a href=\"?pphase=11&p=" + password + "\">Atr&aacutes</a>");
+    out.println("<button class=\"homeButton\"><a href=\"?pphase=01&p=" + password + "\" class=\"button\">Inicio</a></button>");
+    out.println("<button class=\"backButton\"><a href=\"?pphase=11&p=" + password + "\" class=\"button\">Atr&aacutes</a></button>");
     out.println("</section>");
     out.println("<footer>");
     out.println("<hr>");
@@ -386,6 +389,7 @@ public class FrontEnd {
     out.println("<html>");
     out.println("<head>");
     out.println("<title>P2EA</title>");
+    out.println("<link rel=\"stylesheet\" href=\"/sint101/p2/eaml.css\">");
     out.println("</head>");
     out.println("<body>");
     out.println("<header>");
@@ -405,8 +409,8 @@ public class FrontEnd {
     // out.println("<input type=\"submit\" class=\"homeButton\" value=\"Inicio\" onclick=\"form.pphase.value=\"01\"\">");
     // out.println("<input type=\"submit\" class=\"backButton\" value=\"Atrás\" onclick=\"pphase.value=\"12\"\">");
     // out.println("</form>");
-    out.println("<a href=\"?pphase=01&p=" + password + "\">Inicio</a>");
-    out.println("<a href=\"?pphase=12&p=" + password + "&pdegree=" + pdegree + "\">Atr&aacute;s</a>");
+    out.println("<button class=\"homeButton\"><a href=\"?pphase=01&p=" + password + "\" class=\"button\">Inicio</a></button>");
+    out.println("<button class=\"backButton\"><a href=\"?pphase=12&p=" + password + "&pdegree=" + pdegree + "\" class=\"button\">Atr&aacute;s</a></button>");
     out.println("</section>");
     out.println("<footer>");
     out.println("<hr>");
@@ -442,6 +446,7 @@ public class FrontEnd {
     out.println("<html>");
     out.println("<head>");
     out.println("<title>P2EA</title>");
+    out.println("<link rel=\"stylesheet\" href=\"/sint101/p2/eaml.css\">");
     out.println("</head>");
     out.println("<body>");
     out.println("<header>");
@@ -478,6 +483,7 @@ public class FrontEnd {
     out.println("<html>");
     out.println("<head>");
     out.println("<title>P2EA</title>");
+    out.println("<link rel=\"stylesheet\" href=\"/sint101/p2/eaml.css\">");
     out.println("</head>");
     out.println("<body>");
     out.println("<header>");
@@ -514,6 +520,7 @@ public class FrontEnd {
     out.println("<html>");
     out.println("<head>");
     out.println("<title>P2EA</title>");
+    out.println("<link rel=\"stylesheet\" href=\"/sint101/p2/eaml.css\">");
     out.println("</head>");
     out.println("<body>");
     out.println("<header>");
