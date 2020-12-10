@@ -65,6 +65,9 @@ public class Parser {
     } catch(SAXException saxe) {
       System.out.println("1: " + saxe);
     } catch (IOException ioe) {
+      System.out.println(ioe);
+    } catch (Exception e) {
+      System.out.println(e);
     }
 
     //Obtenemos archivos EAML
@@ -85,14 +88,19 @@ public class Parser {
       //Buscamos mas ficheros EAML
       for (int i = 0; i < eamlnodes.getLength(); i++) {
         String nextFile_url = ((Element)eamlnodes.item(i)).getTextContent();
-        nextFile = servletcontext.getRealPath(nextFile_url);
+        //nextFile = servletcontext.getRealPath(nextFile_url);
+        nextFile = nextFile_url;
         if (!filesList.contains(nextFile)) {
             moreFiles = true;
         }
       }
 
     } catch(NullPointerException npe) {
+      System.out.println(npe);
     } catch (XPathExpressionException xpe_e) {
+      System.out.println(xpe_e);
+    } catch (Exception e) {
+      System.out.println(e);
     }
 
     //En caso de warnings

@@ -18,7 +18,8 @@ public class Sint101P2 extends HttpServlet {
   final static String JAXP_SCHEMA_SOURCE = "http://java.sun.com/xml/jaxp/properties/schemaSource";
 
   final static String xsd_url = "/p2/eaml.xsd";
-  static String xml_url = "/p2/teleco.xml";
+  //static String xml_url = "/p2/teleco.xml";
+  static String xml_url = "http://gssi.det.uvigo.es/users/agil/public_html/SINT/20-21/teleco.xml";
   static File xsd;
   static File xml;
   //Lista de documentos validos
@@ -33,11 +34,13 @@ public class Sint101P2 extends HttpServlet {
     try {
       ServletContext servletcontext= config.getServletContext();
       xsd = new File(servletcontext.getRealPath(xsd_url));
-      xml = new File(servletcontext.getRealPath(xml_url));
+      //xml = new File(servletcontext.getRealPath(xml_url));
+      xml = new File(xml_url);
 
       //Llamo al parser
       Parser eamlParser = new Parser();
-      docsMap = eamlParser.parser(servletcontext.getRealPath(xml_url), servletcontext.getRealPath(xsd_url), servletcontext);
+      //docsMap = eamlParser.parser(servletcontext.getRealPath(xml_url), servletcontext.getRealPath(xsd_url), servletcontext);
+      docsMap = eamlParser.parser(xml_url, servletcontext.getRealPath(xsd_url), servletcontext);
 
       //Obtengo avisos
       warningsFiles = eamlParser.getWarningsFiles();
