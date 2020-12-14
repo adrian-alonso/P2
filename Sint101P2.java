@@ -35,7 +35,7 @@ public class Sint101P2 extends HttpServlet {
       ServletContext servletcontext= config.getServletContext();
       xsd = new File(servletcontext.getRealPath(xsd_url));
       //xml = new File(servletcontext.getRealPath(xml_url));
-      xml = new File(xml_url);
+      //xml = new File(xml_url);
 
       //Llamo al parser
       Parser eamlParser = new Parser();

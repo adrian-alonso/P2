@@ -3,6 +3,7 @@ package p2;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.io.*;
+import java.net.*;
 import javax.xml.parsers.*;
 import javax.xml.xpath.*;
 import org.w3c.dom.*;
@@ -17,6 +18,7 @@ public class Parser {
 
   String nextFile;
   ArrayList<String> filesList = new ArrayList<String>();
+  int files = 0;
   HashMap<String,Document> docsMap = new HashMap<String,Document>();
 
   //Listas para guardar los errores de las excepciones
@@ -29,11 +31,12 @@ public class Parser {
   }
 
   //METODOS
-  public HashMap<String,Document> parser(String file_xml, String file_xsd, ServletContext servletcontext) {
+  public HashMap<String,Document> parser(String file_xml, String xsd_url, ServletContext servletcontext) {
     DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
     dbf.setValidating(true);
     dbf.setNamespaceAware(true);
 
+    File file_xsd = new File(xsd_url);
     dbf.setAttribute(JAXP_SCHEMA_LANGUAGE,W3C_XML_SCHEMA);
     dbf.setAttribute(JAXP_SCHEMA_SOURCE,file_xsd);
 
@@ -41,18 +44,32 @@ public class Parser {
     try {
       db  = dbf.newDocumentBuilder();
     } catch(ParserConfigurationException pce) {
+      System.out.println(pce);
+    } catch (Exception e) {
+      System.out.println(e);
     }
 
-    boolean moreEAML = searchEAML(file_xml, db, servletcontext);
-    while (moreEAML == true) {
-      moreEAML = searchEAML(nextFile, db, servletcontext);
+    filesList.add(file_xml);
+    files = 1;
+    boolean moreEAML = searchEAML(filesList.get(0), db, servletcontext);
+    while (files < filesList.size()) {
+      moreEAML = searchEAML(filesList.get(files), db, servletcontext);
+      files = files+1;
     }
 
     return docsMap;
   }
 
-  public boolean searchEAML(String file, DocumentBuilder db, ServletContext servletcontext) {
-    File eamlFile = new File(file);
+  public boolean searchEAML(String url, DocumentBuilder db, ServletContext servletcontext) {
+    //File eamlFile = null;
+    URL eamlFile = null;
+    try {
+      eamlFile = new URL(url);
+      //eamlFile = new File(urlfile);
+    } catch (Exception e) {
+      System.out.println(e);
+    }
+
     boolean moreFiles = false;
 
     //Llama gestor de errores
@@ -61,7 +78,7 @@ public class Parser {
 
     Document doc = null;
     try {
-      doc = db.parse(eamlFile);
+      doc = db.parse(url);
     } catch(SAXException saxe) {
       System.out.println("1: " + saxe);
     } catch (IOException ioe) {
@@ -83,14 +100,14 @@ public class Parser {
       degree = ((Element)degreenode.item(0)).getTextContent();
       //Obtenemos los nodos eaml
       NodeList eamlnodes = (NodeList)xpath.evaluate(exp, doc, XPathConstants.NODESET);
-      filesList.add(file);
 
       //Buscamos mas ficheros EAML
       for (int i = 0; i < eamlnodes.getLength(); i++) {
         String nextFile_url = ((Element)eamlnodes.item(i)).getTextContent();
         //nextFile = servletcontext.getRealPath(nextFile_url);
         nextFile = nextFile_url;
-        if (!filesList.contains(nextFile)) {
+        if (!filesList.contains("http://gssi.det.uvigo.es/users/agil/public_html/SINT/20-21/" + nextFile) && !nextFile.equals("")) {
+            filesList.add("http://gssi.det.uvigo.es/users/agil/public_html/SINT/20-21/" + nextFile);
             moreFiles = true;
         }
       }
@@ -105,7 +122,7 @@ public class Parser {
 
     //En caso de warnings
     if (eaml_ErrorHandler.getWarning() == 1) {
-      WarningFile warning = new WarningFile(file, eaml_ErrorHandler.getWarningList());
+      WarningFile warning = new WarningFile(url, eaml_ErrorHandler.getWarningList());
       boolean anywarning = false;
       for (int i = 0; i < warningsFiles.size(); i++) {
         if (warningsFiles.get(i).getWarningID().equals(warning.getWarningID())) {
@@ -120,7 +137,7 @@ public class Parser {
 
     //En caso de errores
     if (eaml_ErrorHandler.getError() == 1) {
-      ErrorFile error = new ErrorFile(file, eaml_ErrorHandler.getErrorList());
+      ErrorFile error = new ErrorFile(url, eaml_ErrorHandler.getErrorList());
       System.out.println(eaml_ErrorHandler.getErrorList());
       boolean anyerror = false;
       for (int i = 0; i < errorsFiles.size(); i++) {
@@ -131,24 +148,20 @@ public class Parser {
       System.out.println(anyerror);
       if (!anyerror) {
         errorsFiles.add(error);
-        System.out.println(errorsFiles);
-        System.out.println(error.getErrors());
       }
     }
 
     //En caso de errores fatales
     if (eaml_ErrorHandler.getFatalError() == 1) {
-      FatalErrorFile fatalerror = new FatalErrorFile(file, eaml_ErrorHandler.getFatalErrorList());
+      FatalErrorFile fatalerror = new FatalErrorFile(url, eaml_ErrorHandler.getFatalErrorList());
       boolean anyfatalerror = false;
       for (int i = 0; i < fatalErrorsFiles.size(); i++) {
         if (fatalErrorsFiles.get(i).getFatalErrorID().equals(fatalerror.getFatalErrorID())) {
           anyfatalerror = true;
         }
       }
-      System.out.println(anyfatalerror);
       if (!anyfatalerror) {
         fatalErrorsFiles.add(fatalerror);
-        System.out.println(fatalErrorsFiles);
       }
     }
 
