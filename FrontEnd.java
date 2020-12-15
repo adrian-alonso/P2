@@ -41,6 +41,7 @@ public class FrontEnd {
     out.println("<head>");
     out.println("<title>P2EA</title>");
     out.println("<link rel=\"stylesheet\" href=\"/sint101/p2/eaml.css\">");
+    out.println("<meta charset=\"UTF-8\"> ");
     out.println("</head>");
     out.println("<body>");
     out.println("<header>");
@@ -51,11 +52,6 @@ public class FrontEnd {
     out.println("<form name=\"form\" method=\"get\" >");
     out.println("<a href=\"?pphase=02&p=" + password + "\">Ver los ficheros err&oacuteneos</a>");
     out.println("<input type=\"hidden\" id=\"pphase\" name=\"pphase\" value=\"02\">");
-    // out.println("<div id=\"openModal\" class=\"modalDialog\">");
-    // out.println("<div><input type=\"password\" id=\"passwd\" name=\"passwd\" value=\"" + passwd + "\">");
-    // request.setAttribute("password", passwd);
-    // out.println("<a href=\"?pphase=02\" title=\"Send\" class=\"send\">Enviar</a></div>");
-    // out.println("</div>");
     out.println("</form>");
     out.println("</section>");
     out.println("<section>");
@@ -65,7 +61,7 @@ public class FrontEnd {
     out.println("</section>");
     out.println("<footer>");
     out.println("<hr>");
-    out.println("<p>&copy Adri&aacuten Alonso Vilar (2020-2021)</p>");
+    out.println("<p>&copy; Adri&aacuten Alonso Vilar (2020-2021)</p>");
     out.println("</footer>");
     out.println("</body>");
     out.println("</html>");
@@ -108,6 +104,7 @@ public class FrontEnd {
     out.println("<head>");
     out.println("<title>P2EA</title>");
     out.println("<link rel=\"stylesheet\" href=\"/sint101/p2/eaml.css\">");
+    out.println("<meta charset=\"UTF-8\"> ");
     out.println("</head>");
     out.println("<body>");
     out.println("<header>");
@@ -143,11 +140,11 @@ public class FrontEnd {
     out.println("</ul>");
     out.println("</section>");
     out.println("<section>");
-    out.println("<a href=\"?pphase=01&p=" + password + "\" class=\"button\"><button class=\"backButton\">Atr&aacutes</button></a>");
+    out.println("<a href=\"?pphase=01&p=" + password + "\" class=\"button\"><button class=\"backButton\">Atr&aacute;s</button></a>");
     out.println("</section>");
     out.println("<footer>");
     out.println("<hr>");
-    out.println("<p>&copy Adri&aacuten Alonso Vilar (2020-2021)</p>");
+    out.println("<p>&copy; Adri&aacuten Alonso Vilar (2020-2021)</p>");
     out.println("</footer>");
     out.println("</body>");
     out.println("</html>");
@@ -222,6 +219,7 @@ public class FrontEnd {
     out.println("<head>");
     out.println("<title>P2EA</title>");
     out.println("<link rel=\"stylesheet\" href=\"/sint101/p2/eaml.css\">");
+    out.println("<meta charset=\"UTF-8\"> ");
     out.println("</head>");
     out.println("<body>");
     out.println("<header>");
@@ -241,7 +239,7 @@ public class FrontEnd {
     out.println("</section>");
     out.println("<footer>");
     out.println("<hr>");
-    out.println("<p>&copy Adri&aacuten Alonso Vilar (2020-2021)</p>");
+    out.println("<p>&copy; Adri&aacuten Alonso Vilar (2020-2021)</p>");
     out.println("</footer>");
     out.println("</body>");
     out.println("</html>");
@@ -295,6 +293,7 @@ public class FrontEnd {
     out.println("<head>");
     out.println("<title>P2EA</title>");
     out.println("<link rel=\"stylesheet\" href=\"/sint101/p2/eaml.css\">");
+    out.println("<meta charset=\"UTF-8\">");
     out.println("</head>");
     out.println("<body>");
     out.println("<header>");
@@ -313,11 +312,11 @@ public class FrontEnd {
     out.println("</section>");
     out.println("<section>");
     out.println("<a href=\"?pphase=01&p=" + password + "\" class=\"button\"><button class=\"homeButton\">Inicio</button></a>");
-    out.println("<a href=\"?pphase=11&p=" + password + "\" class=\"button\"><button class=\"backButton\">Atr&aacutes</button></a>");
+    out.println("<a href=\"?pphase=11&p=" + password + "\" class=\"button\"><button class=\"backButton\">Atr&aacute;s</button></a>");
     out.println("</section>");
     out.println("<footer>");
     out.println("<hr>");
-    out.println("<p>&copy Adri&aacuten Alonso Vilar (2020-2021)</p>");
+    out.println("<p>&copy; Adri&aacuten Alonso Vilar (2020-2021)</p>");
     out.println("</footer>");
     out.println("</body>");
     out.println("</html>");
@@ -380,6 +379,7 @@ public class FrontEnd {
     out.println("<head>");
     out.println("<title>P2EA</title>");
     out.println("<link rel=\"stylesheet\" href=\"/sint101/p2/eaml.css\">");
+    out.println("<meta charset=\"UTF-8\">");
     out.println("</head>");
     out.println("<body>");
     out.println("<header>");
@@ -396,11 +396,11 @@ public class FrontEnd {
     out.println("</section>");
     out.println("<section>");
     out.println("<a href=\"?pphase=01&p=" + password + "\" class=\"button\"><button class=\"homeButton\">Inicio</button></a>");
-    out.println("<a href=\"?pphase=12&p=" + password + "\" class=\"button\"><button class=\"backButton\">Atr&aacutes</button></a>");
+    out.println("<a href=\"?pphase=12&pdegree=" + pdegree + "&p=" + password + "\" class=\"button\"><button class=\"backButton\">Atr&aacute;s</button></a>");
     out.println("</section>");
     out.println("<footer>");
     out.println("<hr>");
-    out.println("<p>&copy Adri&aacute;n Alonso Vilar (2020-2021)</p>");
+    out.println("<p>&copy; Adri&aacute;n Alonso Vilar (2020-2021)</p>");
     out.println("</footer>");
     out.println("</body>");
     out.println("</html>");
@@ -433,6 +433,7 @@ public class FrontEnd {
     out.println("<head>");
     out.println("<title>P2EA</title>");
     out.println("<link rel=\"stylesheet\" href=\"/sint101/p2/eaml.css\">");
+    out.println("<meta charset=\"UTF-8\">");
     out.println("</head>");
     out.println("<body>");
     out.println("<header>");
@@ -444,7 +445,7 @@ public class FrontEnd {
     out.println("</section>");
     out.println("<footer>");
     out.println("<hr>");
-    out.println("<p>&copy Adri&aacuten Alonso Vilar (2020-2021)</p>");
+    out.println("<p>&copy; Adri&aacuten Alonso Vilar (2020-2021)</p>");
     out.println("</footer>");
     out.println("</body>");
     out.println("</html>");
@@ -470,6 +471,7 @@ public class FrontEnd {
     out.println("<head>");
     out.println("<title>P2EA</title>");
     out.println("<link rel=\"stylesheet\" href=\"/sint101/p2/eaml.css\">");
+    out.println("<meta charset=\"UTF-8\">");
     out.println("</head>");
     out.println("<body>");
     out.println("<header>");
@@ -481,7 +483,7 @@ public class FrontEnd {
     out.println("</section>");
     out.println("<footer>");
     out.println("<hr>");
-    out.println("<p>&copy Adri&aacuten Alonso Vilar (2020-2021)</p>");
+    out.println("<p>&copy; Adri&aacuten Alonso Vilar (2020-2021)</p>");
     out.println("</footer>");
     out.println("</body>");
     out.println("</html>");
@@ -507,6 +509,7 @@ public class FrontEnd {
     out.println("<head>");
     out.println("<title>P2EA</title>");
     out.println("<link rel=\"stylesheet\" href=\"/sint101/p2/eaml.css\">");
+    out.println("<meta charset=\"UTF-8\">");
     out.println("</head>");
     out.println("<body>");
     out.println("<header>");
@@ -518,7 +521,7 @@ public class FrontEnd {
     out.println("</section>");
     out.println("<footer>");
     out.println("<hr>");
-    out.println("<p>&copy Adri&aacuten Alonso Vilar (2020-2021)</p>");
+    out.println("<p>&copy; Adri&aacuten Alonso Vilar (2020-2021)</p>");
     out.println("</footer>");
     out.println("</body>");
     out.println("</html>");

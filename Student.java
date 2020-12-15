@@ -52,7 +52,22 @@ public class Student implements Comparable<Student> {
   }
 
   public int compareTo(Student st) {
-    return this.id.compareTo(st.getId());
+    Boolean flag1 = Character.isDigit(this.getId().charAt(0));
+    Boolean flag2 = Character.isDigit(st.getId().charAt(0));
+
+    if (flag1 && flag2) {
+      if (this.getStudentName().compareTo(st.getStudentName())<0) {
+        return -1;
+      } else if (this.getStudentName().compareTo(st.getStudentName())>0) {
+        return 1;
+      } else {
+        return 0;
+      }
+    } else if (flag1) {
+      return -2;
+    } else {
+      return 2;
+    }
   }
 
 }

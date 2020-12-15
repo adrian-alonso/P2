@@ -43,7 +43,19 @@ public class Subject implements Comparable<Subject> {
   }
 
   public int compareTo(Subject s) {
-    return this.subjectName.compareTo(s.getSubjectName());
+    if (this.getCourse()<s.getCourse()) {
+      return -2;
+    } else if (this.getCourse()>s.getCourse()) {
+      return 2;
+    } else {
+      if (this.getSubjectName().compareTo(s.getSubjectName())<0) {
+        return -1;
+      } else if (this.getSubjectName().compareTo(s.getSubjectName())>0) {
+        return 1;
+      } else {
+        return 0;
+      }
+    }
   }
 
 }

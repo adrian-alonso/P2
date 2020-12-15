@@ -44,9 +44,6 @@ public class Parser {
     try {
       db  = dbf.newDocumentBuilder();
     } catch(ParserConfigurationException pce) {
-      System.out.println(pce);
-    } catch (Exception e) {
-      System.out.println(e);
     }
 
     filesList.add(file_xml);
@@ -65,9 +62,7 @@ public class Parser {
     URL eamlFile = null;
     try {
       eamlFile = new URL(url);
-      //eamlFile = new File(urlfile);
     } catch (Exception e) {
-      System.out.println(e);
     }
 
     boolean moreFiles = false;
@@ -80,11 +75,7 @@ public class Parser {
     try {
       doc = db.parse(url);
     } catch(SAXException saxe) {
-      System.out.println("1: " + saxe);
     } catch (IOException ioe) {
-      System.out.println(ioe);
-    } catch (Exception e) {
-      System.out.println(e);
     }
 
     //Obtenemos archivos EAML
@@ -104,7 +95,6 @@ public class Parser {
       //Buscamos mas ficheros EAML
       for (int i = 0; i < eamlnodes.getLength(); i++) {
         String nextFile_url = ((Element)eamlnodes.item(i)).getTextContent();
-        //nextFile = servletcontext.getRealPath(nextFile_url);
         nextFile = nextFile_url;
         if (!filesList.contains("http://gssi.det.uvigo.es/users/agil/public_html/SINT/20-21/" + nextFile) && !nextFile.equals("")) {
             filesList.add("http://gssi.det.uvigo.es/users/agil/public_html/SINT/20-21/" + nextFile);
@@ -113,11 +103,7 @@ public class Parser {
       }
 
     } catch(NullPointerException npe) {
-      System.out.println(npe);
     } catch (XPathExpressionException xpe_e) {
-      System.out.println(xpe_e);
-    } catch (Exception e) {
-      System.out.println(e);
     }
 
     //En caso de warnings
@@ -129,7 +115,6 @@ public class Parser {
           anywarning = true;
         }
       }
-      System.out.println(anywarning);
       if (!anywarning) {
         warningsFiles.add(warning);
       }
@@ -138,14 +123,12 @@ public class Parser {
     //En caso de errores
     if (eaml_ErrorHandler.getError() == 1) {
       ErrorFile error = new ErrorFile(url, eaml_ErrorHandler.getErrorList());
-      System.out.println(eaml_ErrorHandler.getErrorList());
       boolean anyerror = false;
       for (int i = 0; i < errorsFiles.size(); i++) {
         if (errorsFiles.get(i).getErrorID().equals(error.getErrorID())) {
           anyerror = true;
         }
       }
-      System.out.println(anyerror);
       if (!anyerror) {
         errorsFiles.add(error);
       }

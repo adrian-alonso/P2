@@ -11,6 +11,7 @@ import javax.xml.xpath.*;
 import org.xml.sax.SAXException;
 import org.w3c.dom.*;
 import java.io.IOException;
+import java.nio.charset.*;
 
 public class Sint101P2 extends HttpServlet {
   final static String JAXP_SCHEMA_LANGUAGE = "http://java.sun.com/xml/jaxp/properties/schemaLanguage";
@@ -18,8 +19,8 @@ public class Sint101P2 extends HttpServlet {
   final static String JAXP_SCHEMA_SOURCE = "http://java.sun.com/xml/jaxp/properties/schemaSource";
 
   final static String xsd_url = "/p2/eaml.xsd";
-  //static String xml_url = "/p2/teleco.xml";
-  static String xml_url = "http://gssi.det.uvigo.es/users/agil/public_html/SINT/20-21/teleco.xml";
+  static String xml_url = "/p2/teleco.xml";
+  //static String xml_url = "http://gssi.det.uvigo.es/users/agil/public_html/SINT/20-21/teleco.xml";
   static File xsd;
   static File xml;
   //Lista de documentos validos
@@ -34,13 +35,11 @@ public class Sint101P2 extends HttpServlet {
     try {
       ServletContext servletcontext= config.getServletContext();
       xsd = new File(servletcontext.getRealPath(xsd_url));
-      //xml = new File(servletcontext.getRealPath(xml_url));
-      //xml = new File(xml_url);
 
       //Llamo al parser
       Parser eamlParser = new Parser();
-      //docsMap = eamlParser.parser(servletcontext.getRealPath(xml_url), servletcontext.getRealPath(xsd_url), servletcontext);
-      docsMap = eamlParser.parser(xml_url, servletcontext.getRealPath(xsd_url), servletcontext);
+      //docsMap = eamlParser.parser(xml_url, servletcontext.getRealPath(xsd_url), servletcontext);
+      docsMap = eamlParser.parser(servletcontext.getRealPath(xml_url), servletcontext.getRealPath(xsd_url), servletcontext);
 
       //Obtengo avisos
       warningsFiles = eamlParser.getWarningsFiles();
@@ -65,7 +64,9 @@ public class Sint101P2 extends HttpServlet {
     String password = req.getParameter("p");
     String auto = req.getParameter("auto");
 
-    //EAMLlists eamlLists = new EAMLlists(xml, docsMap);
+    req.setCharacterEncoding("UTF-8");
+    res.setCharacterEncoding("UTF-8");
+
     FrontEnd screen = new FrontEnd();
 
     //Comprobamos si hay contraseña y si es correcta
@@ -175,10 +176,10 @@ public class Sint101P2 extends HttpServlet {
       }
 
     } catch (Exception e) {
-      System.out.println(e);
     }
 
     //Ordenar
+    Collections.sort(subjectsList);
     return subjectsList;
   }
 
@@ -205,6 +206,7 @@ public class Sint101P2 extends HttpServlet {
         String nameEXP = "/Degree/Course/Subject[Name=\"" + subject + "\"]/Student/Name";
         NodeList names = (NodeList)xpath.evaluate(nameEXP, doc, XPathConstants.NODESET);
         String studentName = ((Element)names.item(i)).getTextContent().trim();
+
 
         //DNI or Resident
         String idEXP = "/Degree/Course/Subject[Name=\"" + subject + "\"]/Student/Dni | /Degree/Course/Subject[Name=\"" + subject + "\"]/Student/Resident";

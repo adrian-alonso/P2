@@ -17,21 +17,18 @@
       </Student>
     </Subject>
   </Course>
-  <Course number="2">
-    <Subject idSub="PDS" type="core">
-      <Name>PDS</Name>
+  <Course number="4">
+    <Subject idSub="DAM" type="optional">
+      <Name>DAM</Name>
       <Student>
-        <Name>Ana Carolina Barros</Name>
-        <Dni>78556788N</Dni>
-        <Grade>7.5</Grade>
-      </Student>
-      <Student>
-        <Name>Manuel</Name>
-        <Dni>78904658J</Dni>
-        <Grade>5.0</Grade>
+        <Name>Adrián Alonso Vilar</Name>
+        <Dni>35488995H</Dni>
+        <Grade>7.68</Grade>
+        <EAML>/p2/biologia.xml</EAML>
       </Student>
     </Subject>
   </Course>
+
   <Course number="3">
     <Subject idSub="CEP" type="core">
       <Name>CEP</Name>
@@ -58,17 +55,6 @@
         <Name>Adrián Alonso Vilar</Name>
         <Dni>35488995H</Dni>
         <Grade>7.2</Grade>
-      </Student>
-    </Subject>
-  </Course>
-  <Course number="4">
-    <Subject idSub="DAM" type="optional">
-      <Name>DAM</Name>
-      <Student>
-        <Name>Adrián Alonso Vilar</Name>
-        <Dni>35488995H</Dni>
-        <Grade>7.68</Grade>
-        <EAML>/p2/biologia.xml</EAML>
       </Student>
     </Subject>
   </Course>
