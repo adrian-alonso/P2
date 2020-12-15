@@ -38,8 +38,7 @@ public class Sint101P2 extends HttpServlet {
 
       //Llamo al parser
       Parser eamlParser = new Parser();
-      //docsMap = eamlParser.parser(xml_url, servletcontext.getRealPath(xsd_url), servletcontext);
-      docsMap = eamlParser.parser(servletcontext.getRealPath(xml_url), servletcontext.getRealPath(xsd_url), servletcontext);
+      docsMap = eamlParser.parser(xml_url, servletcontext.getRealPath(xsd_url), servletcontext);
 
       //Obtengo avisos
       warningsFiles = eamlParser.getWarningsFiles();
