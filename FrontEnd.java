@@ -1,10 +1,11 @@
 package p2;
 
 import java.io.*;
+import java.nio.charset.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import java.util.ArrayList;
-
+import java.net.URLEncoder;
 import java.util.HashMap;
 import org.w3c.dom.Document;
 
@@ -230,7 +231,7 @@ public class FrontEnd {
     out.println("<p>Selecciona :</p>");
     out.println("<ol>");
     for (int i = 0; i < degrees.size(); i++) {
-      out.println("<li><a href=\"?pphase=12&p=" + password + "&pdegree=" + degrees.get(i) + "\">" + degrees.get(i) + "</a></li>");
+      out.println("<li><a href=\"?pphase=12&p=" + password + "&pdegree=" + URLEncoder.encode(degrees.get(i), StandardCharsets.UTF_8) + "\">" + degrees.get(i) + "</a></li>");
     }
     out.println("</ol>");
     out.println("</section>");
@@ -305,7 +306,7 @@ public class FrontEnd {
     out.println("<ol>");
     for (int i = 0; i < subjects.size(); i++) {
       imprimir = "Asignatura = '" + subjects.get(i).getSubjectName() + "'";
-      out.print("<li><a href=\"?pphase=13&p=" + password + "&pdegree=" + pdegree + "&psubject=" + subjects.get(i).getSubjectName() + "\">" + imprimir + "</a>");
+      out.print("<li><a href=\"?pphase=13&p=" + password + "&pdegree=" + URLEncoder.encode(pdegree, StandardCharsets.UTF_8) + "&psubject=" + URLEncoder.encode(subjects.get(i).getSubjectName(), StandardCharsets.UTF_8) + "\">" + imprimir + "</a>");
       out.println(" " + subjects.get(i).toString() + "</li>");
     }
     out.println("</ol>");
@@ -396,7 +397,7 @@ public class FrontEnd {
     out.println("</section>");
     out.println("<section>");
     out.println("<a href=\"?pphase=01&p=" + password + "\" class=\"button\"><button class=\"homeButton\">Inicio</button></a>");
-    out.println("<a href=\"?pphase=12&pdegree=" + pdegree + "&p=" + password + "\" class=\"button\"><button class=\"backButton\">Atr&aacute;s</button></a>");
+    out.println("<a href=\"?pphase=12&pdegree=" + URLEncoder.encode(pdegree, StandardCharsets.UTF_8) + "&p=" + password + "\" class=\"button\"><button class=\"backButton\">Atr&aacute;s</button></a>");
     out.println("</section>");
     out.println("<footer>");
     out.println("<hr>");
