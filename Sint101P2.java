@@ -19,8 +19,8 @@ public class Sint101P2 extends HttpServlet {
   final static String JAXP_SCHEMA_SOURCE = "http://java.sun.com/xml/jaxp/properties/schemaSource";
 
   final static String xsd_url = "/p2/eaml.xsd";
-  static String xml_url = "/p2/teleco.xml";
-  //static String xml_url = "http://gssi.det.uvigo.es/users/agil/public_html/SINT/20-21/teleco.xml";
+  //static String xml_url = "/p2/teleco.xml";
+  static String xml_url = "http://gssi.det.uvigo.es/users/agil/public_html/SINT/20-21/teleco.xml";
   static File xsd;
   static File xml;
   //Lista de documentos validos
