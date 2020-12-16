@@ -160,9 +160,9 @@ public class FrontEnd {
     out.println("<wrongDocs>");
     out.println("<warnings>");
     for (int i = 0; i < warningsFiles.size(); i++){
+      out.println("<warning>");
+      out.println("<file>" + warningsFiles.get(i).getWarningID() + "</file>");
       for (int j = 0; j < warningsFiles.get(i).getWarnings().size(); j++){
-        out.println("<warning>");
-        out.println("<file>" + warningsFiles.get(i).getWarningID() + "</file>");
         out.println("<cause>" + this.HTMLreplace(warningsFiles.get(i).getWarnings().get(j)) + "</cause>");
         out.println("</warning>");
       }
@@ -170,9 +170,9 @@ public class FrontEnd {
     out.println("</warnings>");
     out.println("<errors>");
     for (int i = 0; i < errorsFiles.size(); i++){
+      out.println("<error>");
+      out.println("<file>" + errorsFiles.get(i).getErrorID() + "</file>");
       for (int j = 0; j < errorsFiles.get(i).getErrors().size(); j++){
-        out.println("<error>");
-        out.println("<file>" + errorsFiles.get(i).getErrorID() + "</file>");
         out.println("<cause>" + this.HTMLreplace(errorsFiles.get(i).getErrors().get(j)) + "</cause>");
         out.println("</error>");
       }
@@ -180,9 +180,9 @@ public class FrontEnd {
     out.println("</errors>");
     out.println("<fatalerrors>");
     for (int i = 0; i < fatalErrorsFiles.size(); i++){
+      out.println("<fatalerror>");
+      out.println("<file>" + fatalErrorsFiles.get(i).getFatalErrorID() + "</file>");
       for (int j = 0; j < fatalErrorsFiles.get(i).getFatalErrors().size(); j++){
-        out.println("<fatalerror>");
-        out.println("<file>" + fatalErrorsFiles.get(i).getFatalErrorID() + "</file>");
         out.println("<cause>" + this.HTMLreplace(fatalErrorsFiles.get(i).getFatalErrors().get(j)) + "</cause>");
         out.println("</fatalerror>");
       }
