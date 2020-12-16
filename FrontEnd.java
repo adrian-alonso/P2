@@ -164,8 +164,8 @@ public class FrontEnd {
       out.println("<file>" + warningsFiles.get(i).getWarningID() + "</file>");
       for (int j = 0; j < warningsFiles.get(i).getWarnings().size(); j++){
         out.println("<cause>" + this.HTMLreplace(warningsFiles.get(i).getWarnings().get(j)) + "</cause>");
-        out.println("</warning>");
       }
+      out.println("</warning>");
     }
     out.println("</warnings>");
     out.println("<errors>");
@@ -174,8 +174,8 @@ public class FrontEnd {
       out.println("<file>" + errorsFiles.get(i).getErrorID() + "</file>");
       for (int j = 0; j < errorsFiles.get(i).getErrors().size(); j++){
         out.println("<cause>" + this.HTMLreplace(errorsFiles.get(i).getErrors().get(j)) + "</cause>");
-        out.println("</error>");
       }
+      out.println("</error>");
     }
     out.println("</errors>");
     out.println("<fatalerrors>");
@@ -184,8 +184,8 @@ public class FrontEnd {
       out.println("<file>" + fatalErrorsFiles.get(i).getFatalErrorID() + "</file>");
       for (int j = 0; j < fatalErrorsFiles.get(i).getFatalErrors().size(); j++){
         out.println("<cause>" + this.HTMLreplace(fatalErrorsFiles.get(i).getFatalErrors().get(j)) + "</cause>");
-        out.println("</fatalerror>");
       }
+      out.println("</fatalerror>");
     }
     out.println("</fatalerrors>");
     out.println("</wrongDocs>");
