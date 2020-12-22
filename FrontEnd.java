@@ -162,9 +162,11 @@ public class FrontEnd {
     for (int i = 0; i < warningsFiles.size(); i++){
       out.println("<warning>");
       out.println("<file>" + warningsFiles.get(i).getWarningID() + "</file>");
+      out.print("<cause>");
       for (int j = 0; j < warningsFiles.get(i).getWarnings().size(); j++){
-        out.println("<cause>" + this.HTMLreplace(warningsFiles.get(i).getWarnings().get(j)) + "</cause>");
+        out.print(this.HTMLreplace(warningsFiles.get(i).getWarnings().get(0)));
       }
+      out.println("</cause>");
       out.println("</warning>");
     }
     out.println("</warnings>");
@@ -172,9 +174,11 @@ public class FrontEnd {
     for (int i = 0; i < errorsFiles.size(); i++){
       out.println("<error>");
       out.println("<file>" + errorsFiles.get(i).getErrorID() + "</file>");
+      out.print("<cause>");
       for (int j = 0; j < errorsFiles.get(i).getErrors().size(); j++){
-        out.println("<cause>" + this.HTMLreplace(errorsFiles.get(i).getErrors().get(j)) + "</cause>");
+        out.print(this.HTMLreplace(errorsFiles.get(i).getErrors().get(0)));
       }
+      out.println("</cause>");
       out.println("</error>");
     }
     out.println("</errors>");
@@ -182,9 +186,11 @@ public class FrontEnd {
     for (int i = 0; i < fatalErrorsFiles.size(); i++){
       out.println("<fatalerror>");
       out.println("<file>" + fatalErrorsFiles.get(i).getFatalErrorID() + "</file>");
+      out.print("<cause>");
       for (int j = 0; j < fatalErrorsFiles.get(i).getFatalErrors().size(); j++){
-        out.println("<cause>" + this.HTMLreplace(fatalErrorsFiles.get(i).getFatalErrors().get(j)) + "</cause>");
+        out.print(this.HTMLreplace(fatalErrorsFiles.get(i).getFatalErrors().get(0)));
       }
+      out.println("</cause>");
       out.println("</fatalerror>");
     }
     out.println("</fatalerrors>");
@@ -537,7 +543,7 @@ public class FrontEnd {
     PrintWriter out = response.getWriter();
 
     out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-    out.println("<wrongRequest>bad passwd</wrongRequest>");
+    out.println("<wrongRequest>no param:" + param + "</wrongRequest>");
   }
 
   public String HTMLreplace (String sentence) {

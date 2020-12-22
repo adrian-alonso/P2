@@ -65,8 +65,16 @@ public class Student implements Comparable<Student> {
       }
     } else if (flag1) {
       return -2;
-    } else {
+    } else if (flag2) {
       return 2;
+    } else {
+      if (this.getStudentName().compareTo(st.getStudentName())<0) {
+        return -1;
+      } else if (this.getStudentName().compareTo(st.getStudentName())>0) {
+        return 1;
+      } else {
+        return 0;
+      }
     }
   }
 
